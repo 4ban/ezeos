@@ -6,6 +6,7 @@ from tkinter import ttk
 from PIL import Image
 from PIL import ImageTk
 
+
 class UI:
     def __init__(self, root):
         self.root = root
@@ -25,6 +26,8 @@ class UI:
         self.tabpanel()
         # Add output panel
         self.outputpanel()
+        # Fill the tabs
+        self.tabFill = TabFill()
 
     def menubar(self):
         menubar = Menu(self.root,
@@ -98,23 +101,23 @@ class UI:
 
         self.notebook = ttk.Notebook(self.root, style='TNotebook')
 
-        tab1 = ttk.Frame(self.notebook, style='TFrame')
-        tab2 = ttk.Frame(self.notebook, style='TFrame')
-        tab3 = ttk.Frame(self.notebook, style='TFrame')
-        tab4 = ttk.Frame(self.notebook, style='TFrame')
-        tab5 = ttk.Frame(self.notebook, style='TFrame')
-        tab6 = ttk.Frame(self.notebook, style='TFrame')
-        tab7 = ttk.Frame(self.notebook, style='TFrame')
-        tab8 = ttk.Frame(self.notebook, style='TFrame')
-        tab9 = ttk.Frame(self.notebook, style='TFrame')
-        tab10 = ttk.Frame(self.notebook, style='TFrame')
-        tab11 = ttk.Frame(self.notebook, style='TFrame')
-        tab12 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab1 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab2 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab3 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab4 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab5 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab6 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab7 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab8 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab9 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab10 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab11 = ttk.Frame(self.notebook, style='TFrame')
+        self.tab12 = ttk.Frame(self.notebook, style='TFrame')
 
-        self.notebook.add(tab1, text='Block Chain')
-        self.notebook.add(tab2, text='Wallets')
-        self.notebook.add(tab3, text='Accounts')
-        self.notebook.add(tab4, text='Contracts')
+        self.notebook.add(self.tab1, text='Block Chain')
+        self.notebook.add(self.tab2, text='Wallets')
+        self.notebook.add(self.tab3, text='Accounts')
+        self.notebook.add(self.tab4, text='Contracts')
 
         self.notebook.pack(expand=True, fill='both')
 

@@ -11,3 +11,11 @@ def run():
     app.logger("Hello world")
     root.mainloop()
 
+
+
+
+
+#
+# lbl = ttk.Label(tab1, wraplength='4i', justify=LEFT, anchor=N,
+#                         text='ddfdfdf')
+#         lbl.pack()
