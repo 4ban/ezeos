@@ -7,8 +7,7 @@ from gui.ui import UI
 def run():
     root = Tk()
     app = UI(root)
-    app.status.set("App is running")
-    # app.status.clear()
-    app.log.insert('0.0', "hello")
+    app.setstatus("App is running")
+    app.logger("Hello world")
     root.mainloop()
 
