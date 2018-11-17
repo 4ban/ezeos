@@ -30,3 +30,7 @@ class OutputPanel(object):
         self.log.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.log.yview)
         self.log.pack(expand=True, fill='both')
+
+    def logger(self, message):
+        self.log.delete('0.0', END)
+        self.log.insert('0.0', message)

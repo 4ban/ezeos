@@ -5,6 +5,8 @@ from tkinter import *
 from gui.tabPanel import TabPanel
 from gui.menuBar import MenuBar
 from gui.outputPanel import OutputPanel
+from ezeos import EZEOS
+from ezeos import VERSION
 
 
 class UI(object):
@@ -26,17 +28,18 @@ class UI(object):
         self.tabPanel = TabPanel(self)
         # Add output panel
         self.outputPanel = OutputPanel(self)
+        # Init complete
+        self.setstatus(VERSION)
 
-    def logger(self, message):
-        self.outputPanel.log.delete('0.0', END)
-        self.outputPanel.log.insert('0.0', message)
+        self.log = self.outputPanel.logger
+        self.log(EZEOS)
 
     def setstatus(self, message):
         self.status.clear()
         self.status.set(message)
 
     def about(self):
-        self.logger("Volentix Labs, Inc")
+        self.log("Volentix Labs, Inc")
 
 
 class StatusBar(Frame):

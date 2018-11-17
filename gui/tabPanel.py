@@ -8,10 +8,12 @@ from tkinter import ttk
 class TabPanel(object):
     def __init__(self, parent):
         self.parent = parent
-        print("hello tab")
+        # self.parent.log("hj")
         self.tabPanel()
-        lbl = ttk.Label(self.tab1, text='ddfdfdf')
-        lbl.pack()
+        self.fillTab1()
+        self.fillTab2()
+        self.fillTab3()
+        self.fillTab4()
 
     def tabPanel(self):
         style = ttk.Style(self.parent.root)
@@ -52,14 +54,6 @@ class TabPanel(object):
         self.tab2 = ttk.Frame(self.notebook, style='TFrame')
         self.tab3 = ttk.Frame(self.notebook, style='TFrame')
         self.tab4 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab5 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab6 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab7 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab8 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab9 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab10 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab11 = ttk.Frame(self.notebook, style='TFrame')
-        self.tab12 = ttk.Frame(self.notebook, style='TFrame')
 
         self.notebook.add(self.tab1, text='Block Chain')
         self.notebook.add(self.tab2, text='Wallets')
@@ -67,3 +61,40 @@ class TabPanel(object):
         self.notebook.add(self.tab4, text='Contracts')
 
         self.notebook.pack(expand=True, fill='both')
+
+    def fillTab1(self):
+        self.netState = IntVar()
+
+        mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState)
+        testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState)
+        btn = Button(self.tab1, text="Click Me", command=clicked(self))
+
+        mainNet.pack(anchor=NW, padx=0, pady=3)
+        testNet.pack(anchor=NW, padx=0, pady=3)
+        btn.pack(anchor=NW, padx=0, pady=3)
+
+    def fillTab2(self):
+        lbl = Label(self.tab2, text="Hello")
+        lbl.pack()
+
+        btn = Button(self.tab2, text="Click Me", command=self.parent.about)
+        btn.pack()
+
+        txt = Entry(self.tab2, width=10)
+        txt.pack()
+        # in func
+        # res = "Welcome to " + txt.get()
+        #
+        # lbl.configure(text=res)
+
+    def fillTab3(self):
+        pass
+
+    def fillTab4(self):
+        pass
+
+
+def clicked(root):
+    # root.parent.setstatus("hello")
+    # root.logger(root.netState.get())
+    pass
