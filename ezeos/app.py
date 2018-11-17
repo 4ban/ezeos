@@ -3,10 +3,15 @@
 
 from tkinter import Tk
 from gui.ui import UI
+from ezeos import EZEOS
+from ezeos import VERSION
+
 
 def run():
     root = Tk()
     app = UI(root)
-    app.setstatus("App is running")
-    app.logger("Hello world")
+    app.setstatus(VERSION)
+    app.logger(EZEOS)
+    # Application
+
     root.mainloop()
