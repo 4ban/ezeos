@@ -8,7 +8,6 @@ from tkinter import ttk
 class TabPanel(object):
     def __init__(self, parent):
         self.parent = parent
-        # self.parent.log("hj")
         self.tabPanel()
         self.fillTab1()
         self.fillTab2()
@@ -60,14 +59,14 @@ class TabPanel(object):
         self.notebook.add(self.tab3, text='Accounts')
         self.notebook.add(self.tab4, text='Contracts')
 
-        self.notebook.pack(expand=True, fill='both')
+        self.notebook.pack(expand=True, fill='both', )
 
     def fillTab1(self):
         self.netState = IntVar()
 
         mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState)
         testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState)
-        btn = Button(self.tab1, text="Click Me", command=clicked(self))
+        btn = Button(self.tab1, text="Click Me", command=self.clicked)
 
         mainNet.pack(anchor=NW, padx=0, pady=3)
         testNet.pack(anchor=NW, padx=0, pady=3)
@@ -93,8 +92,5 @@ class TabPanel(object):
     def fillTab4(self):
         pass
 
-
-def clicked(root):
-    # root.parent.setstatus("hello")
-    # root.logger(root.netState.get())
-    pass
+    def clicked(self):
+        self.parent.log(self.netState.get())

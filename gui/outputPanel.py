@@ -29,7 +29,7 @@ class OutputPanel(object):
         # attach text box to scrollbar
         self.log.config(yscrollcommand=scrollbar.set)
         scrollbar.config(command=self.log.yview)
-        self.log.pack(expand=True, fill='both')
+        self.log.pack(expand=True, fill='both', side=BOTTOM)
 
     def logger(self, message):
         self.log.delete('0.0', END)

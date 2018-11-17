@@ -24,15 +24,14 @@ class UI(object):
         # Add status bar
         self.status = StatusBar(self.root)
         self.status.pack(side=TOP, fill=X)
-        # Add Tab panel
-        self.tabPanel = TabPanel(self)
+        self.setstatus(VERSION)
         # Add output panel
         self.outputPanel = OutputPanel(self)
-        # Init complete
-        self.setstatus(VERSION)
-
+        # Create Logger
         self.log = self.outputPanel.logger
         self.log(EZEOS)
+        # Add Tab panel
+        self.tabPanel = TabPanel(self)
 
     def setstatus(self, message):
         self.status.clear()
