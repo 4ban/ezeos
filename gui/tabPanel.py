@@ -47,6 +47,14 @@ class TabPanel(object):
                         highlightthickness=0,
                         borderwidth=0)
 
+        style.configure('TRadiobutton',
+                    background="#ff0000",
+                    foreground='#dfdfdf',
+                    highlightbackground="#232323",
+                    highlightcolor="#0000ff",
+                    selectcolor="#232323",
+                    )
+
         self.notebook = ttk.Notebook(self.parent.root, style='TNotebook')
 
         self.tab1 = ttk.Frame(self.notebook, style='TFrame')
@@ -64,12 +72,25 @@ class TabPanel(object):
     def fillTab1(self):
         self.netState = IntVar()
 
-        mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState)
-        testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState)
-        btn = Button(self.tab1, text="Click Me", command=self.clicked)
+        mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState,
+                              background="#4E4E7B",
+                              foreground='#dfdfdf',
+                              highlightbackground="#4E4E7B",
+                              highlightcolor="#4E4E7B",
+                              selectcolor="#00ff00",
+                              indicatoron=0)
+        testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState,
+                              background="#4E4E7B",
+                              foreground='#dfdfdf',
+                              highlightbackground="#4E4E7B",
+                              highlightcolor="#4E4E7B",
+                              selectcolor="#00ff00",
+                              indicatoron=0)
 
-        mainNet.pack(anchor=NW, padx=0, pady=3)
-        testNet.pack(anchor=NW, padx=0, pady=3)
+        mainNet.pack(side=LEFT, padx=0, pady=3, anchor=NW)
+        testNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
+
+        btn = Button(self.tab1, text="Click Me", command=self.clicked)
         btn.pack(anchor=NW, padx=0, pady=3)
 
     def fillTab2(self):
