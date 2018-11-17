@@ -3,6 +3,9 @@
 
 from tkinter import *
 from tkinter import ttk
+from ezeos import MAIN_PRODUCERS
+from ezeos import TEST_PRODUCERS
+from ezeos import PRODUCER
 
 
 class TabPanel(object):
@@ -71,24 +74,33 @@ class TabPanel(object):
 
     def fillTab1(self):
         self.netState = IntVar()
+        self.producer = StringVar()
+        self.producer.set(TEST_PRODUCERS[0])
 
         mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState,
                               background="#4E4E7B",
                               foreground='#dfdfdf',
                               highlightbackground="#4E4E7B",
                               highlightcolor="#4E4E7B",
-                              selectcolor="#00ff00",
-                              indicatoron=0)
+                              selectcolor="#27a768",
+                              indicatoron=0,
+                              command=self.update)
         testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState,
                               background="#4E4E7B",
                               foreground='#dfdfdf',
                               highlightbackground="#4E4E7B",
                               highlightcolor="#4E4E7B",
-                              selectcolor="#00ff00",
-                              indicatoron=0)
+                              selectcolor="#27a768",
+                              indicatoron=0,
+                              command=self.update)
 
-        mainNet.pack(side=LEFT, padx=0, pady=3, anchor=NW)
+        self.mainNetList = OptionMenu(self.tab1, self.producer, *MAIN_PRODUCERS)
+        self.testNetList = OptionMenu(self.tab1, self.producer, *TEST_PRODUCERS)
+
+        mainNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
+        self.mainNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
         testNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
+        self.testNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
 
         btn = Button(self.tab1, text="Click Me", command=self.clicked)
         btn.pack(anchor=NW, padx=0, pady=3)
@@ -113,5 +125,14 @@ class TabPanel(object):
     def fillTab4(self):
         pass
 
+    def update(self):
+        if self.netState.get() == 1:
+            self.testNetList.configure(state="disabled")
+            self.mainNetList.configure(state="normal")
+        elif self.netState.get() == 2:
+            self.testNetList.configure(state="normal")
+            self.mainNetList.configure(state="disabled")
+
     def clicked(self):
-        self.parent.log(self.netState.get())
+        mes = self.producer.get()
+        self.parent.log(mes)
