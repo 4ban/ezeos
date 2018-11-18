@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
+
 VERSION = "v0.0.1"
 
 EZEOS='''
@@ -12,6 +14,14 @@ EZEOS='''
  |______| /_____| |______|  \____/  |_____/ 
                                             
                                             '''
+
+
+EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
+
+ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
+
+CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
+
 MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
                   'https://eos.greymass.com:443',

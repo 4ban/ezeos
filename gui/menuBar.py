@@ -1,9 +1,11 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 from tkinter import *
 from PIL import Image
 from PIL import ImageTk
+from ezeos import ROOT_DIR
 
 
 class MenuBar(object):
@@ -20,7 +22,7 @@ class MenuBar(object):
                        activeforeground='#dfdfdf',
                        bd=0)
         # Set logo
-        logo = Image.open("../resources/icon.png")
+        logo = Image.open(os.path.join(ROOT_DIR,'resources/icon.png'))
         logo = logo.resize((20, 20), Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(logo)
 

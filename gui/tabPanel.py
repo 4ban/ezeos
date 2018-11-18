@@ -11,6 +11,10 @@ from ezeos import PRODUCER
 class TabPanel(object):
     def __init__(self, parent):
         self.parent = parent
+        # Variables
+        self.netState = IntVar()
+        self.producer = StringVar()
+
         self.tabPanel()
         self.fillTab1()
         self.fillTab2()
@@ -73,8 +77,6 @@ class TabPanel(object):
         self.notebook.pack(expand=True, fill='both', )
 
     def fillTab1(self):
-        self.netState = IntVar()
-        self.producer = StringVar()
         self.producer.set(TEST_PRODUCERS[0])
 
         mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState,
@@ -84,7 +86,7 @@ class TabPanel(object):
                               highlightcolor="#4E4E7B",
                               selectcolor="#27a768",
                               indicatoron=0,
-                              command=self.update)
+                              command=self.update_tab1)
         testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState,
                               background="#4E4E7B",
                               foreground='#dfdfdf',
@@ -92,7 +94,7 @@ class TabPanel(object):
                               highlightcolor="#4E4E7B",
                               selectcolor="#27a768",
                               indicatoron=0,
-                              command=self.update)
+                              command=self.update_tab1)
 
         self.mainNetList = OptionMenu(self.tab1, self.producer, *MAIN_PRODUCERS)
         self.testNetList = OptionMenu(self.tab1, self.producer, *TEST_PRODUCERS)
@@ -101,7 +103,10 @@ class TabPanel(object):
         self.mainNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
         testNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
         self.testNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
+        self.testNetList.configure(state="disabled")
+        self.mainNetList.configure(state="disabled")
 
+        # delete
         btn = Button(self.tab1, text="Click Me", command=self.clicked)
         btn.pack(anchor=NW, padx=0, pady=3)
 
@@ -125,7 +130,7 @@ class TabPanel(object):
     def fillTab4(self):
         pass
 
-    def update(self):
+    def update_tab1(self):
         if self.netState.get() == 1:
             self.testNetList.configure(state="disabled")
             self.mainNetList.configure(state="normal")
@@ -133,6 +138,7 @@ class TabPanel(object):
             self.testNetList.configure(state="normal")
             self.mainNetList.configure(state="disabled")
 
+    # delete
     def clicked(self):
         mes = self.producer.get()
         self.parent.log(mes)
