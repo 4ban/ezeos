@@ -13,7 +13,7 @@ class UI(object):
     def __init__(self, root):
         self.root = root
         self.root.title("EZEOS")
-        self.root.geometry('1200x700')
+        self.root.geometry('1200x600')
         self.root.config(bg="#2D2D46",
                          bd=0,
                          highlightbackground="#2D2D46",

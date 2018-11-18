@@ -18,9 +18,9 @@ class TabPanel(object):
 
         self.tabPanel()
         self.fillTab1()
-        self.fillTab2()
-        self.fillTab3()
-        self.fillTab4()
+        # self.fillTab2()
+        # self.fillTab3()
+        # self.fillTab4()
 
     def tabPanel(self):
         style = ttk.Style(self.parent.root)
@@ -76,12 +76,21 @@ class TabPanel(object):
         self.notebook.add(self.tab3, text='Accounts')
         self.notebook.add(self.tab4, text='Contracts')
 
-        self.notebook.pack(expand=True, fill='both')
+        self.notebook.pack(fill='both') #expand=True
+
+        # Create one scrollbar for all tabs
+        tab1_scrollbar = Scrollbar(self.tab1, orient=VERTICAL, bg="#2D2D46")
+        tab1_scrollbar.pack(side=RIGHT, fill=Y)
+        # Canvas for all tabs
+        self.tab1_canvas = Canvas(self.tab1, height=100, yscrollcommand=tab1_scrollbar.set)
+        self.tab1_canvas.pack(expand=True, fill='both')
+
+        tab1_scrollbar.config(command=self.tab1_canvas.yview)
 
     def fillTab1(self):
         self.producer.set(TEST_PRODUCERS[0])
 
-        mainNet = Radiobutton(self.tab1, text='Main Net', value=1, variable=self.netState,
+        mainNet = Radiobutton(self.tab1_canvas, text='Main Net', value=1, variable=self.netState,
                               background="#4E4E7B",
                               foreground='#dfdfdf',
                               activebackground="#c9c9d7",
@@ -94,7 +103,7 @@ class TabPanel(object):
                               highlightthickness=0,
                               borderwidth=0,
                               command=self.update_tab1)
-        testNet = Radiobutton(self.tab1, text='Test Net', value=2, variable=self.netState,
+        testNet = Radiobutton(self.tab1_canvas, text='Test Net', value=2, variable=self.netState,
                               background="#4E4E7B",
                               foreground='#dfdfdf',
                               activebackground="#c9c9d7",
@@ -108,7 +117,7 @@ class TabPanel(object):
                               borderwidth=0,
                               command=self.update_tab1)
 
-        self.mainNetList = OptionMenu(self.tab1, self.producer, *MAIN_PRODUCERS)
+        self.mainNetList = OptionMenu(self.tab1_canvas, self.producer, *MAIN_PRODUCERS)
         self.mainNetList.configure(state="disabled",
                                    background="#4E4E7B",
                                    foreground="#dfdfdf",
@@ -128,7 +137,7 @@ class TabPanel(object):
                                            activebackground="#c9c9d7",
                                            activeforeground="#232323")
 
-        self.testNetList = OptionMenu(self.tab1, self.producer, *TEST_PRODUCERS)
+        self.testNetList = OptionMenu(self.tab1_canvas, self.producer, *TEST_PRODUCERS)
         self.testNetList.configure(state="disabled",
                                    background="#4E4E7B",
                                    foreground="#dfdfdf",
@@ -153,10 +162,10 @@ class TabPanel(object):
         testNet.grid(row=2, column=1, padx=5, pady=5)
         self.testNetList.grid(row=2, column=2, columnspan=2, padx=5, pady=5)
 
-        ttk.Separator(self.tab1, orient=HORIZONTAL).grid(row=3, columnspan=10, sticky="ew", pady=5)
-        ttk.Separator(self.tab1, orient=VERTICAL).grid(row=1, rowspan=3, column=5, sticky="ns", padx=0)
+        ttk.Separator(self.tab1_canvas, orient=HORIZONTAL).grid(row=3, columnspan=10, sticky="ew", pady=5)
+        ttk.Separator(self.tab1_canvas, orient=VERTICAL).grid(row=1, rowspan=3, column=5, sticky="ns", padx=0)
         # delete
-        testBtn1 = Button(self.tab1,
+        testBtn1 = Button(self.tab1_canvas,
                           text="Show current producer",
                           command=self.show_current_producer,
                           background="#232323",
@@ -173,7 +182,7 @@ class TabPanel(object):
         testBtn1.grid(row=1, column=4, rowspan=2, padx=5, pady=5)
 
         # getInfo
-        info = Button(self.tab1,
+        info = Button(self.tab1_canvas,
                            text="Get info",
                            command=ezeos.getInfo,
                            background="#4E4E7B",
@@ -190,12 +199,12 @@ class TabPanel(object):
         info.grid(row=1, column=6, padx=5)
 
         # setBlockNumber
-        self.blockNumber = Entry(self.tab1, width=12)
+        self.blockNumber = Entry(self.tab1_canvas, width=12)
         self.blockNumber.insert(END, '1')
         self.blockNumber.grid(row=4, column=1)
 
         # getBlockInfo
-        blockInfo = Button(self.tab1,
+        blockInfo = Button(self.tab1_canvas,
                            text="Block info",
                            command=ezeos.getBlockInfo,
                            background="#4E4E7B",
@@ -210,6 +219,22 @@ class TabPanel(object):
                            disabledforeground="#4E4E7B",
                            relief="flat")
         blockInfo.grid(row=4, column=2)
+
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=5)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=6)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=7)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=8)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=9)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=10)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=11)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=12)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=13)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=14)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=15)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=16)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=17)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=18)
+        Button(self.tab1_canvas, text="Click Me", command=self.parent.about).grid(row=19)
 
     def fillTab2(self):
         lbl = Label(self.tab2, text="Hello")
