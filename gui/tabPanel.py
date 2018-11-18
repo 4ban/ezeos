@@ -14,6 +14,7 @@ class TabPanel(object):
         # Variables
         self.netState = IntVar()
         self.producer = StringVar()
+        self.blockNumber = StringVar()
 
         self.tabPanel()
         self.fillTab1()
@@ -35,8 +36,7 @@ class TabPanel(object):
                   background=[("selected", "#4E4E7B"),
                               ("active", "#4E4E7B")],
                   foreground=[("selected", "#dfdfdf"),
-                              ("active", "#dfdfdf")]
-                  )
+                              ("active", "#dfdfdf")])
 
         style.configure("TNotebook.Tab",
                         background="#2D2D46",
@@ -59,8 +59,10 @@ class TabPanel(object):
                     foreground='#dfdfdf',
                     highlightbackground="#232323",
                     highlightcolor="#0000ff",
-                    selectcolor="#232323",
-                    )
+                    selectcolor="#232323")
+
+        style.configure('TSeparator',
+                        background="#2D2D46")
 
         self.notebook = ttk.Notebook(self.parent.root, style='TNotebook')
 
@@ -74,7 +76,7 @@ class TabPanel(object):
         self.notebook.add(self.tab3, text='Accounts')
         self.notebook.add(self.tab4, text='Contracts')
 
-        self.notebook.pack(expand=True, fill='both', )
+        self.notebook.pack(expand=True, fill='both')
 
     def fillTab1(self):
         self.producer.set(TEST_PRODUCERS[0])
@@ -146,12 +148,13 @@ class TabPanel(object):
                                            activebackground="#c9c9d7",
                                            activeforeground="#232323")
 
-        mainNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
-        self.mainNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
-        testNet.pack(side=LEFT, padx=5, pady=3, anchor=NW)
-        self.testNetList.pack(side=LEFT, padx=5, pady=3, anchor=NW)
+        mainNet.grid(row=1, column=1, padx=5, pady=5)
+        self.mainNetList.grid(row=1, column=2, columnspan=2, padx=5, pady=5)
+        testNet.grid(row=2, column=1, padx=5, pady=5)
+        self.testNetList.grid(row=2, column=2, columnspan=2, padx=5, pady=5)
 
-
+        ttk.Separator(self.tab1, orient=HORIZONTAL).grid(row=3, columnspan=10, sticky="ew", pady=5)
+        ttk.Separator(self.tab1, orient=VERTICAL).grid(row=1, rowspan=3, column=5, sticky="ns", padx=0)
         # delete
         testBtn1 = Button(self.tab1,
                           text="Show current producer",
@@ -167,7 +170,29 @@ class TabPanel(object):
                           activeforeground="#232323",
                           disabledforeground="#4E4E7B",
                           relief="flat")
-        testBtn1.pack(anchor=NW, padx=0, pady=3)
+        testBtn1.grid(row=1, column=4, rowspan=2, padx=5, pady=5)
+
+        # getInfo
+        info = Button(self.tab1,
+                           text="Get info",
+                           command=ezeos.getInfo,
+                           background="#4E4E7B",
+                           foreground="#dfdfdf",
+                           highlightbackground="#2D2D46",
+                           highlightcolor="#2D2D46",
+                           highlightthickness=0,
+                           borderwidth=0,
+                           height=1,
+                           activebackground="#c9c9d7",
+                           activeforeground="#232323",
+                           disabledforeground="#4E4E7B",
+                           relief="flat")
+        info.grid(row=1, column=6, padx=5)
+
+        # setBlockNumber
+        self.blockNumber = Entry(self.tab1, width=12)
+        self.blockNumber.insert(END, '1')
+        self.blockNumber.grid(row=4, column=1)
 
         # getBlockInfo
         blockInfo = Button(self.tab1,
@@ -184,17 +209,17 @@ class TabPanel(object):
                            activeforeground="#232323",
                            disabledforeground="#4E4E7B",
                            relief="flat")
-        blockInfo.pack()
+        blockInfo.grid(row=4, column=2)
 
     def fillTab2(self):
         lbl = Label(self.tab2, text="Hello")
-        lbl.pack()
+        lbl.grid()
 
         btn = Button(self.tab2, text="Click Me", command=self.parent.about)
-        btn.pack()
+        btn.grid()
 
         txt = Entry(self.tab2, width=10)
-        txt.pack()
+        txt.grid()
         # in func
         # res = "Welcome to " + txt.get()
         #
