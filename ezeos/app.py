@@ -33,24 +33,34 @@ def getCleosCommand():
 
 
 # Logic functions
-def getInfo():
+def getProducerInfo():
     try:
-        out = subprocess.check_output(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'])
-        out = out.decode("utf-8")
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'], stdout=subprocess.PIPE)
     except Exception as e:
         print(e)
         print('\nCould not get info')
     else:
+        out = out.stdout.decode('utf-8')
         app.outputPanel.logger(out)
+
 
 def getBlockInfo():
     try:
-        out = subprocess.check_output(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'block', app.tabPanel.blockNumber.get()])
-        out = out.decode("utf-8")
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'block', app.tabPanel.blockNumber.get()], stdout=subprocess.PIPE)
     except Exception as e:
         print(e)
         print('\nCould not get block info')
     else:
+        out = out.stdout.decode('utf-8')
         app.outputPanel.logger(out)
 
 
+def getBlockProducers():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'system', 'listproducers'], stdout=subprocess.PIPE)
+    except Exception as e:
+        print(e)
+        print("\nCould not get producer list")
+    else:
+        out = out.stdout.decode('utf-8')
+        app.outputPanel.logger(out)
