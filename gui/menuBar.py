@@ -11,7 +11,6 @@ from ezeos import ROOT_DIR
 class MenuBar(object):
     def __init__(self, parent):
         self.parent = parent
-        print("hello menu")
         self.menuBar()
 
     def menuBar(self):

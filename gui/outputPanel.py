@@ -7,7 +7,6 @@ from tkinter import *
 class OutputPanel(object):
     def __init__(self, parent):
         self.parent = parent
-        print("hello output")
         self.outputPanel()
 
     def outputPanel(self):

@@ -56,5 +56,3 @@ MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
 TEST_PRODUCERS = ['http://api.kylin.alohaeos.com',
                   'http://127.0.0.1:8888',
                   'http://35.183.129.78:8080']
-
-PRODUCER = ''
