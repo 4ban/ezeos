@@ -3,6 +3,8 @@
 
 from tkinter import Tk
 from gui.ui import UI
+from ezeos import DOCKER_CONTAINER_NAME
+from ezeos import TIMEOUT
 import subprocess
 import os
 
@@ -18,8 +20,6 @@ def run():
 
 
 def getCleosCommand():
-    # TODO move to __init__ or conf file
-    DOCKER_CONTAINER_NAME = 'eos'
     global DOCKER_COMMAND
 
     DOCKER_COMMAND = ['docker', 'exec', DOCKER_CONTAINER_NAME]
@@ -40,11 +40,11 @@ def getCleosCommand():
 # Logic functions
 def getProducerInfo():
     try:
-        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'], timeout=3, stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'], timeout=TIMEOUT, stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
-        out = 'Timeout 3 sec. Producer is not available\n' + str(e)
+        out = 'Timeout. Producer is not available\n' + str(e)
     except Exception as e:
         print(e)
         out = 'Could not get info.\n' + str(e)
@@ -55,11 +55,11 @@ def getProducerInfo():
 def getBlockInfo():
     try:
         out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
-                                      'get', 'block', app.tabPanel.blockNumber.get()], timeout=3, stdout=subprocess.PIPE)
+                                      'get', 'block', app.tabPanel.blockNumber.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
-        out = 'Timeout 3 sec. Can not get block info\n' + str(e)
+        out = 'Timeout. Can not get block info\n' + str(e)
     except Exception as e:
         print(e)
         out = 'Could not get block info.\n' + str(e)
@@ -70,11 +70,11 @@ def getBlockInfo():
 def getBlockProducers():
     try:
         out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
-                                      'system', 'listproducers'], timeout=3, stdout=subprocess.PIPE)
+                                      'system', 'listproducers'], timeout=TIMEOUT, stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
-        out = 'Timeout 3 sec. Can not get producer list\n' + str(e)
+        out = 'Timeout. Can not get producer list\n' + str(e)
     except Exception as e:
         print(e)
         out = "Could not get producer list.\n" + str(e)
@@ -84,11 +84,11 @@ def getBlockProducers():
 
 def getWalletList():
     try:
-        out = subprocess.run(cleos + ['wallet', 'list'], timeout=3, stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['wallet', 'list'], timeout=TIMEOUT, stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
-        out = 'Timeout 3 sec. Can not get wallet list\n' + str(e)
+        out = 'Timeout. Can not get wallet list\n' + str(e)
     except Exception as e:
         print(e)
         out = "Could not get wallet list. \n" + str(e)
@@ -119,15 +119,15 @@ def createWallet():
         try:
             if toConsole == '--to-console':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--to-console'], timeout=3, stdout=subprocess.PIPE)
+                                              '--to-console'], timeout=TIMEOUT, stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--file', "/root/" + app.tabPanel.walletName.get()], timeout=3, stdout=subprocess.PIPE)
+                                              '--file', "/root/" + app.tabPanel.walletName.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
         except subprocess.TimeoutExpired as e:
             print(e)
-            out = 'Timeout 3 sec. Can not create wallet\n' + str(e)
+            out = 'Timeout. Can not create wallet\n' + str(e)
         except Exception as e:
             print(e)
             out = "Could not create wallet.\n" + str(e)
@@ -140,15 +140,15 @@ def createWallet():
         try:
             if toConsole == '--to-console':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--to-console'], timeout=3, stdout=subprocess.PIPE)
+                                              '--to-console'], timeout=TIMEOUT, stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--file', walletDir + "/" + app.tabPanel.walletName.get()], timeout=3, stdout=subprocess.PIPE)
+                                              '--file', walletDir + "/" + app.tabPanel.walletName.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
         except subprocess.TimeoutExpired as e:
             print(e)
-            out = 'Timeout 3 sec. Can not create wallet\n' + str(e)
+            out = 'Timeout. Can not create wallet\n' + str(e)
         except Exception as e:
             print(e)
             out = "Could not create wallet.\n" + str(e)

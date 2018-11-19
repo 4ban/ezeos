@@ -17,6 +17,8 @@ EZEOS = '''
 |______| /_____| |______|  \____/  |_____/
 '''
 
+DOCKER_CONTAINER_NAME = 'eos'
+TIMEOUT = 3
 MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
                   'https://eos.greymass.com:443',
