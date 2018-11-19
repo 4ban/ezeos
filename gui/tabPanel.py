@@ -365,13 +365,28 @@ class TabPanel(object):
                             relief="flat")
         walletList.grid(row=0, column=1, padx=5, ipady=5, sticky=W)
 
+        currentWallet = Button(walletFrame,
+                            text="Get current wallet",
+                            command=self.currentWallet,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        currentWallet.grid(row=0, column=2, padx=5, ipady=5, sticky=W)
+
         # Open wallet (filesystem)
         self.openWalletName = Entry(walletFrame, width=20,
                                 background="#dfdfdf",
                                 foreground="#232323",
                                 highlightthickness=0,
                                 borderwidth=0)
-        self.openWalletName.insert(END, 'wallet name to open')
         self.openWalletName.grid(row=1, column=0, ipadx=3, ipady=3, padx=5, pady=5, sticky=W)
         openWallet = Button(walletFrame,
                                       text="Open wallet",
@@ -389,9 +404,25 @@ class TabPanel(object):
                                       relief="flat")
         openWallet.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=W)
 
+        unlockWallet = Button(walletFrame,
+                            text="Unlock wallet",
+                            command=ezeos.unlockWallet,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        unlockWallet.grid(row=1, column=2, padx=5, ipady=5, pady=5, sticky=W)
+
         # wallet keys
         walletKeyFrame = LabelFrame(self.tab2,
-                                 text="Wallet operations",
+                                 text="Keys operations",
                                  background="#2D2D46",
                                  foreground='#dfdfdf',
                                  borderwidth=2)
@@ -484,6 +515,10 @@ class TabPanel(object):
 
     def show_current_producer(self):
         mes = self.producer.get()
+        self.parent.log(mes)
+
+    def currentWallet(self):
+        mes = self.openWalletName.get()
         self.parent.log(mes)
 
     # delete

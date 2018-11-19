@@ -132,6 +132,7 @@ def createWallet():
             print(e)
             out = "Could not create wallet.\n" + str(e)
         finally:
+            app.tabPanel.openWalletName.insert(0, app.tabPanel.walletName.get())
             app.outputPanel.logger(out)
     else:
         walletDir = os.environ['HOME'] + '/eosio-wallet'
@@ -153,6 +154,7 @@ def createWallet():
             print(e)
             out = "Could not create wallet.\n" + str(e)
         finally:
+            app.tabPanel.openWalletName.insert(0, app.tabPanel.walletName.get())
             app.outputPanel.logger(out)
 
 
@@ -169,18 +171,21 @@ def openWallet():
         print(e)
         out = 'Could not open the wallet.\n' + str(e)
     finally:
-        out += "\nRemember this wallet as default for this ezeos session!"
+        if 'Opened' in out:
+            out += "\nRemember this wallet as default for this ezeos session!"
         app.outputPanel.logger(out)
+
+
+def unlockWallet():
+    app.outputPanel.logger("pass")
 
 
 def showKeys():
     app.outputPanel.logger("Pass")
 
 
-
 def showPrivateKeys():
     app.outputPanel.logger("Pass")
-
 
 
 def importKey():
