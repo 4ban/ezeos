@@ -169,4 +169,19 @@ def openWallet():
         print(e)
         out = 'Could not open the wallet.\n' + str(e)
     finally:
+        out += "\nRemember this wallet as default for this ezeos session!"
         app.outputPanel.logger(out)
+
+
+def showKeys():
+    app.outputPanel.logger("Pass")
+
+
+
+def showPrivateKeys():
+    app.outputPanel.logger("Pass")
+
+
+
+def importKey():
+    app.outputPanel.logger("Pass")

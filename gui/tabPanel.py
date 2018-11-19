@@ -96,7 +96,7 @@ class TabPanel(object):
                                   background="#2D2D46",
                                   foreground='#dfdfdf',
                                   borderwidth=2)
-        networkFrame.grid(row=0, column=0, sticky=NW, pady=5, ipady=5, ipadx=5)
+        networkFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
 
         mainNet = Radiobutton(networkFrame, text='Main Net', value=1, variable=self.netState,
                               background="#4E4E7B",
@@ -192,7 +192,7 @@ class TabPanel(object):
                                 background="#2D2D46",
                                 foreground='#dfdfdf',
                                 borderwidth=2)
-        blockFrame.grid(row=0, column=1, sticky=NW, padx=5, pady=5, ipady=5, ipadx=5)
+        blockFrame.grid(row=0, column=1, sticky=NSEW, padx=5, pady=5, ipady=5, ipadx=5)
 
         # setBlockNumber
         blockNumberLabel = Label(blockFrame, text="Enter block number:",
@@ -266,7 +266,7 @@ class TabPanel(object):
                                        background="#2D2D46",
                                        foreground='#dfdfdf',
                                        borderwidth=2)
-        createWalletFrame.grid(row=0, column=0, sticky=NW, pady=5, ipady=5, ipadx=5)
+        createWalletFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5, columnspan=2)
         # set wallet name
         walletNameLabel = Label(createWalletFrame, text="Enter wallet name: ",
                                 background="#2D2D46",
@@ -330,7 +330,7 @@ class TabPanel(object):
                                  background="#2D2D46",
                                  foreground='#dfdfdf',
                                  borderwidth=2)
-        walletFrame.grid(row=1, column=0, sticky=W, pady=5, ipady=5, ipadx=5)
+        walletFrame.grid(row=1, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
 
         # get wallet list (filesystem)
         walletListFilesystem = Button(walletFrame,
@@ -388,11 +388,68 @@ class TabPanel(object):
                                       disabledforeground="#4E4E7B",
                                       relief="flat")
         openWallet.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=W)
-        #unlock wallet
-        #open wallet
+
+        # wallet keys
+        walletKeyFrame = LabelFrame(self.tab2,
+                                 text="Wallet operations",
+                                 background="#2D2D46",
+                                 foreground='#dfdfdf',
+                                 borderwidth=2)
+        walletKeyFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
         # show keys
+        showKeys = Button(walletKeyFrame,
+                            text="Show public keys",
+                            command=ezeos.showKeys,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        showKeys.grid(row=0, column=0, padx=5, ipady=5, pady=5, sticky=W)
+
+        showPrivateKeys = Button(walletKeyFrame,
+                          text="Show private keys",
+                          command=ezeos.showPrivateKeys,
+                          background="#4E4E7B",
+                          foreground="#dfdfdf",
+                          highlightbackground="#2D2D46",
+                          highlightcolor="#2D2D46",
+                          highlightthickness=0,
+                          borderwidth=0,
+                          height=1,
+                          activebackground="#c9c9d7",
+                          activeforeground="#232323",
+                          disabledforeground="#4E4E7B",
+                          relief="flat")
+        showPrivateKeys.grid(row=0, column=1, padx=5, ipady=5, pady=5, sticky=W)
+
+        importPrivateKeys = Button(walletKeyFrame,
+                                 text="Import key",
+                                 command=ezeos.importKey,
+                                 background="#4E4E7B",
+                                 foreground="#dfdfdf",
+                                 highlightbackground="#2D2D46",
+                                 highlightcolor="#2D2D46",
+                                 highlightthickness=0,
+                                 borderwidth=0,
+                                 height=1,
+                                 activebackground="#c9c9d7",
+                                 activeforeground="#232323",
+                                 disabledforeground="#4E4E7B",
+                                 relief="flat")
+        importPrivateKeys.grid(row=1, column=0, padx=5, ipady=5, pady=5, sticky=W)
+
+
+
+
+        #unlock wallet
         # import keys
-        #show private keys
 
         # # delete
         # testBtn2 = Button(self.tab2,
