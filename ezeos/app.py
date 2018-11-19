@@ -33,7 +33,8 @@ def getCleosCommand():
     except Exception as e:
         cleos = ['cleos']
     else:
-        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME, '/opt/eosio/bin/cleos']
+        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME,
+                 '/opt/eosio/bin/cleos']
 
 
 # Logic functions
@@ -50,7 +51,8 @@ def getProducerInfo():
 
 def getBlockInfo():
     try:
-        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'block', app.tabPanel.blockNumber.get()], stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
+                                      'get', 'block', app.tabPanel.blockNumber.get()], stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except Exception as e:
         print(e)
@@ -61,7 +63,8 @@ def getBlockInfo():
 
 def getBlockProducers():
     try:
-        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'system', 'listproducers'], stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
+                                      'system', 'listproducers'], stdout=subprocess.PIPE)
         out = out.stdout.decode('utf-8')
     except Exception as e:
         print(e)
@@ -103,10 +106,12 @@ def createWallet():
         # docker - cleos wallet create -n twal --file /root/twal saved indide docker /root/
         try:
             if toConsole == '--to-console':
-                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(), '--to-console'], stdout=subprocess.PIPE)
+                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
+                                              '--to-console'], stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
-                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(), '--file', "/root/" + app.tabPanel.walletName.get()], stdout=subprocess.PIPE)
+                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
+                                              '--file', "/root/" + app.tabPanel.walletName.get()], stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
         except Exception as e:
             print(e)
@@ -119,10 +124,12 @@ def createWallet():
             os.makedirs(walletDir)
         try:
             if toConsole == '--to-console':
-                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(), '--to-console'], stdout=subprocess.PIPE)
+                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
+                                              '--to-console'], stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
-                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(), '--file', walletDir + "/" + app.tabPanel.walletName.get()], stdout=subprocess.PIPE)
+                out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
+                                              '--file', walletDir + "/" + app.tabPanel.walletName.get()], stdout=subprocess.PIPE)
                 out = out.stdout.decode('utf-8')
         except Exception as e:
             print(e)

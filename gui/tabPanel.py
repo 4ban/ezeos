@@ -61,11 +61,11 @@ class TabPanel(object):
                         borderwidth=0)
 
         style.configure('TRadiobutton',
-                    background="#ff0000",
-                    foreground='#dfdfdf',
-                    highlightbackground="#232323",
-                    highlightcolor="#0000ff",
-                    selectcolor="#232323")
+                        background="#ff0000",
+                        foreground="#dfdfdf",
+                        highlightbackground="#232323",
+                        highlightcolor="#0000ff",
+                        selectcolor="#232323")
 
         style.configure('TSeparator',
                         background="#2D2D46")
@@ -85,17 +85,16 @@ class TabPanel(object):
         self.notebook.pack(expand=True, fill='both')
         self.notebook.select(self.tab2)
 
-
     def fillTab1(self):
         self.netState.set(2)
         self.producer.set(TEST_PRODUCERS[0])
         # TODO move everything to the label frames
         # network
         networkFrame = LabelFrame(self.tab1,
-                                       text="Network",
-                                       background="#2D2D46",
-                                       foreground='#dfdfdf',
-                                       borderwidth=2)
+                                  text="Network",
+                                  background="#2D2D46",
+                                  foreground='#dfdfdf',
+                                  borderwidth=2)
         networkFrame.grid(row=0, column=0, sticky=NW, pady=5, ipady=5, ipadx=5)
 
         mainNet = Radiobutton(networkFrame, text='Main Net', value=1, variable=self.netState,
@@ -171,27 +170,27 @@ class TabPanel(object):
         self.testNetList.grid(row=1, column=1, columnspan=2, padx=5, pady=5)
 
         currentProducer = Button(networkFrame,
-                          text="Show current producer",
-                          command=self.show_current_producer,
-                          background="#4E4E7B",
-                          foreground="#dfdfdf",
-                          highlightbackground="#2D2D46",
-                          highlightcolor="#2D2D46",
-                          highlightthickness=0,
-                          borderwidth=0,
-                          height=1,
-                          activebackground="#c9c9d7",
-                          activeforeground="#232323",
-                          disabledforeground="#4E4E7B",
-                          relief="flat")
+                                 text="Show current producer",
+                                 command=self.show_current_producer,
+                                 background="#4E4E7B",
+                                 foreground="#dfdfdf",
+                                 highlightbackground="#2D2D46",
+                                 highlightcolor="#2D2D46",
+                                 highlightthickness=0,
+                                 borderwidth=0,
+                                 height=1,
+                                 activebackground="#c9c9d7",
+                                 activeforeground="#232323",
+                                 disabledforeground="#4E4E7B",
+                                 relief="flat")
         currentProducer.grid(row=0, column=3, rowspan=2, padx=5, pady=5, ipady=5)
 
         # Block
         blockFrame = LabelFrame(self.tab1,
-                                  text="Block",
-                                  background="#2D2D46",
-                                  foreground='#dfdfdf',
-                                  borderwidth=2)
+                                text="Block",
+                                background="#2D2D46",
+                                foreground='#dfdfdf',
+                                borderwidth=2)
         blockFrame.grid(row=0, column=1, sticky=NW, padx=5, pady=5, ipady=5, ipadx=5)
 
         # setBlockNumber
@@ -226,25 +225,8 @@ class TabPanel(object):
 
         # getProducerInfo
         info = Button(blockFrame,
-                           text="Get producer info",
-                           command=ezeos.getProducerInfo,
-                           background="#4E4E7B",
-                           foreground="#dfdfdf",
-                           highlightbackground="#2D2D46",
-                           highlightcolor="#2D2D46",
-                           highlightthickness=0,
-                           borderwidth=0,
-                           height=1,
-                           activebackground="#c9c9d7",
-                           activeforeground="#232323",
-                           disabledforeground="#4E4E7B",
-                           relief="flat")
-        info.grid(row=1, column=0, padx=5, pady=5)
-
-        # get block Producers
-        blockProducers = Button(blockFrame,
-                      text="Get producers list",
-                      command=ezeos.getBlockProducers,
+                      text="Get producer info",
+                      command=ezeos.getProducerInfo,
                       background="#4E4E7B",
                       foreground="#dfdfdf",
                       highlightbackground="#2D2D46",
@@ -256,6 +238,23 @@ class TabPanel(object):
                       activeforeground="#232323",
                       disabledforeground="#4E4E7B",
                       relief="flat")
+        info.grid(row=1, column=0, padx=5, pady=5)
+
+        # get block Producers
+        blockProducers = Button(blockFrame,
+                                text="Get producers list",
+                                command=ezeos.getBlockProducers,
+                                background="#4E4E7B",
+                                foreground="#dfdfdf",
+                                highlightbackground="#2D2D46",
+                                highlightcolor="#2D2D46",
+                                highlightthickness=0,
+                                borderwidth=0,
+                                height=1,
+                                activebackground="#c9c9d7",
+                                activeforeground="#232323",
+                                disabledforeground="#4E4E7B",
+                                relief="flat")
         blockProducers.grid(row=1, column=1, padx=5, pady=5)
 
     def fillTab2(self):
@@ -269,8 +268,8 @@ class TabPanel(object):
         createWalletFrame.grid(row=0, column=0, sticky=NW, pady=5, ipady=5, ipadx=5)
         # set wallet name
         walletNameLabel = Label(createWalletFrame, text="Enter wallet name: ",
-                                 background="#2D2D46",
-                                 foreground="#dfdfdf")
+                                background="#2D2D46",
+                                foreground="#dfdfdf")
         walletNameLabel.grid(row=0, column=0)
         self.walletName = Entry(createWalletFrame, width=20,
                                 background="#dfdfdf",
@@ -281,77 +280,60 @@ class TabPanel(object):
         self.walletName.grid(row=0, column=1)
 
         toConsole = Radiobutton(createWalletFrame, text='To console', value='--to-console', variable=self.toConsole,
-                              background="#4E4E7B",
-                              foreground='#dfdfdf',
-                              activebackground="#c9c9d7",
-                              highlightbackground="#4E4E7B",
-                              highlightcolor="#4E4E7B",
-                              selectcolor="#27a768",
-                              indicatoron=0,
-                              height=2,
-                              width=10,
-                              highlightthickness=0,
-                              borderwidth=0)
+                                background="#4E4E7B",
+                                foreground='#dfdfdf',
+                                activebackground="#c9c9d7",
+                                highlightbackground="#4E4E7B",
+                                highlightcolor="#4E4E7B",
+                                selectcolor="#27a768",
+                                indicatoron=0,
+                                height=2,
+                                width=10,
+                                highlightthickness=0,
+                                borderwidth=0)
         toFile = Radiobutton(createWalletFrame, text='To file', value='--file', variable=self.toConsole,
-                              background="#4E4E7B",
-                              foreground='#dfdfdf',
-                              activebackground="#c9c9d7",
-                              highlightbackground="#4E4E7B",
-                              highlightcolor="#4E4E7B",
-                              selectcolor="#27a768",
-                              indicatoron=0,
-                              height=2,
-                              width=10,
-                              highlightthickness=0,
-                              borderwidth=0)
+                             background="#4E4E7B",
+                             foreground='#dfdfdf',
+                             activebackground="#c9c9d7",
+                             highlightbackground="#4E4E7B",
+                             highlightcolor="#4E4E7B",
+                             selectcolor="#27a768",
+                             indicatoron=0,
+                             height=2,
+                             width=10,
+                             highlightthickness=0,
+                             borderwidth=0)
         toConsole.grid(row=0, column=2, padx=5, pady=5)
         toFile.grid(row=0, column=3, padx=5, pady=5)
 
         # create wallet
         createWallet = Button(createWalletFrame,
-                            text="Create wallet",
-                            command=ezeos.createWallet,
-                            background="#4E4E7B",
-                            foreground="#dfdfdf",
-                            highlightbackground="#2D2D46",
-                            highlightcolor="#2D2D46",
-                            highlightthickness=0,
-                            borderwidth=0,
-                            height=1,
-                            activebackground="#c9c9d7",
-                            activeforeground="#232323",
-                            disabledforeground="#4E4E7B",
-                            relief="flat")
+                              text="Create wallet",
+                              command=ezeos.createWallet,
+                              background="#4E4E7B",
+                              foreground="#dfdfdf",
+                              highlightbackground="#2D2D46",
+                              highlightcolor="#2D2D46",
+                              highlightthickness=0,
+                              borderwidth=0,
+                              height=1,
+                              activebackground="#c9c9d7",
+                              activeforeground="#232323",
+                              disabledforeground="#4E4E7B",
+                              relief="flat")
         createWallet.grid(row=0, column=4, padx=5, ipady=5)
 
         # wallet operations
         walletFrame = LabelFrame(self.tab2,
-                                       text="Wallet operations",
-                                       background="#2D2D46",
-                                       foreground='#dfdfdf',
-                                       borderwidth=2)
+                                 text="Wallet operations",
+                                 background="#2D2D46",
+                                 foreground='#dfdfdf',
+                                 borderwidth=2)
         walletFrame.grid(row=1, column=0, sticky=W, pady=5, ipady=5, ipadx=5)
         # get wallet list (cleos)
         walletList = Button(walletFrame,
-                                text="List wallets",
-                                command=ezeos.getWalletList,
-                                background="#4E4E7B",
-                                foreground="#dfdfdf",
-                                highlightbackground="#2D2D46",
-                                highlightcolor="#2D2D46",
-                                highlightthickness=0,
-                                borderwidth=0,
-                                height=1,
-                                activebackground="#c9c9d7",
-                                activeforeground="#232323",
-                                disabledforeground="#4E4E7B",
-                                relief="flat")
-        walletList.grid(row=0, column=0, padx=5, ipady=5)
-
-        # get wallet list (filesystem)
-        walletListFilesystem = Button(walletFrame,
-                            text="List wallets (filesystem)",
-                            command=ezeos.getWalletListFilesystem,
+                            text="List wallets",
+                            command=ezeos.getWalletList,
                             background="#4E4E7B",
                             foreground="#dfdfdf",
                             highlightbackground="#2D2D46",
@@ -363,7 +345,30 @@ class TabPanel(object):
                             activeforeground="#232323",
                             disabledforeground="#4E4E7B",
                             relief="flat")
+        walletList.grid(row=0, column=0, padx=5, ipady=5)
+
+        # get wallet list (filesystem)
+        walletListFilesystem = Button(walletFrame,
+                                      text="List wallets (filesystem)",
+                                      command=ezeos.getWalletListFilesystem,
+                                      background="#4E4E7B",
+                                      foreground="#dfdfdf",
+                                      highlightbackground="#2D2D46",
+                                      highlightcolor="#2D2D46",
+                                      highlightthickness=0,
+                                      borderwidth=0,
+                                      height=1,
+                                      activebackground="#c9c9d7",
+                                      activeforeground="#232323",
+                                      disabledforeground="#4E4E7B",
+                                      relief="flat")
         walletListFilesystem.grid(row=0, column=1, padx=5, ipady=5)
+
+        #unlock wallet
+        #open wallet
+        # show keys
+        # import keys
+        #show private keys
 
         # # delete
         # testBtn2 = Button(self.tab2,

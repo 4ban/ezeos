@@ -21,7 +21,7 @@ class MenuBar(object):
                        activeforeground='#dfdfdf',
                        bd=0)
         # Set logo
-        logo = Image.open(os.path.join(ROOT_DIR,'resources/icon.png'))
+        logo = Image.open(os.path.join(ROOT_DIR, "resources/icon.png"))
         logo = logo.resize((20, 20), Image.ANTIALIAS)
         self.logo = ImageTk.PhotoImage(logo)
 

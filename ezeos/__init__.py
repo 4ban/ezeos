@@ -4,23 +4,18 @@
 import os
 
 VERSION = "v0.0.1"
-
-EZEOS='''
-  ______   ______  ______    ____     _____
- |  ____| |___  / |  ____|  / __ \   / ____|
- | |__       / /  | |__    | |  | | | (___
- |  __|     / /   |  __|   | |  | |  \___ \
- | |____   / /__  | |____  | |__| |  ____) |
- |______| /_____| |______|  \____/  |_____/
-
-                                            '''
-
-
 EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
-
 ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
-
 CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
+
+EZEOS = '''
+ ______   ______  ______    ____     _____
+|  ____| |___  / |  ____|  / __ \   / ____|
+| |__       / /  | |__    | |  | | | (___
+|  __|     / /   |  __|   | |  | |  \___ \\
+| |____   / /__  | |____  | |__| |  ____) |
+|______| /_____| |______|  \____/  |_____/
+'''
 
 MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
