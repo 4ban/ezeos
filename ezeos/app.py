@@ -154,3 +154,19 @@ def createWallet():
             out = "Could not create wallet.\n" + str(e)
         finally:
             app.outputPanel.logger(out)
+
+
+def openWallet():
+    try:
+        out = subprocess.run(cleos + ['wallet', 'open', '-n', app.tabPanel.openWalletName.get()],
+                             timeout=TIMEOUT,
+                             stdout=subprocess.PIPE)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not open the wallet\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not open the wallet.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)

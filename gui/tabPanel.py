@@ -18,6 +18,7 @@ class TabPanel(object):
         # Variables tab 2
         self.toConsole = StringVar()
         self.walletName = StringVar()
+        self.openWalletName = StringVar()
 
         # Variables tab 3
         # Variables tab 4
@@ -204,7 +205,7 @@ class TabPanel(object):
                                  highlightthickness=0,
                                  borderwidth=0)
         self.blockNumber.insert(END, '1')
-        self.blockNumber.grid(row=0, column=1)
+        self.blockNumber.grid(row=0, column=1, ipadx=3, ipady=3)
 
         # getBlockInfo
         blockInfo = Button(blockFrame,
@@ -277,7 +278,7 @@ class TabPanel(object):
                                 highlightthickness=0,
                                 borderwidth=0)
         self.walletName.insert(END, 'default')
-        self.walletName.grid(row=0, column=1)
+        self.walletName.grid(row=0, column=1, ipady=3, ipadx=3)
 
         toConsole = Radiobutton(createWalletFrame, text='To console', value='--to-console', variable=self.toConsole,
                                 background="#4E4E7B",
@@ -330,22 +331,6 @@ class TabPanel(object):
                                  foreground='#dfdfdf',
                                  borderwidth=2)
         walletFrame.grid(row=1, column=0, sticky=W, pady=5, ipady=5, ipadx=5)
-        # get wallet list (cleos)
-        walletList = Button(walletFrame,
-                            text="List wallets",
-                            command=ezeos.getWalletList,
-                            background="#4E4E7B",
-                            foreground="#dfdfdf",
-                            highlightbackground="#2D2D46",
-                            highlightcolor="#2D2D46",
-                            highlightthickness=0,
-                            borderwidth=0,
-                            height=1,
-                            activebackground="#c9c9d7",
-                            activeforeground="#232323",
-                            disabledforeground="#4E4E7B",
-                            relief="flat")
-        walletList.grid(row=0, column=0, padx=5, ipady=5)
 
         # get wallet list (filesystem)
         walletListFilesystem = Button(walletFrame,
@@ -362,8 +347,47 @@ class TabPanel(object):
                                       activeforeground="#232323",
                                       disabledforeground="#4E4E7B",
                                       relief="flat")
-        walletListFilesystem.grid(row=0, column=1, padx=5, ipady=5)
+        walletListFilesystem.grid(row=0, column=0, padx=5, ipady=5, sticky=W)
+        # get wallet list (cleos)
+        walletList = Button(walletFrame,
+                            text="List wallets",
+                            command=ezeos.getWalletList,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        walletList.grid(row=0, column=1, padx=5, ipady=5, sticky=W)
 
+        # Open wallet (filesystem)
+        self.openWalletName = Entry(walletFrame, width=20,
+                                background="#dfdfdf",
+                                foreground="#232323",
+                                highlightthickness=0,
+                                borderwidth=0)
+        self.openWalletName.insert(END, 'wallet name to open')
+        self.openWalletName.grid(row=1, column=0, ipadx=3, ipady=3, padx=5, pady=5, sticky=W)
+        openWallet = Button(walletFrame,
+                                      text="Open wallet",
+                                      command=ezeos.openWallet,
+                                      background="#4E4E7B",
+                                      foreground="#dfdfdf",
+                                      highlightbackground="#2D2D46",
+                                      highlightcolor="#2D2D46",
+                                      highlightthickness=0,
+                                      borderwidth=0,
+                                      height=1,
+                                      activebackground="#c9c9d7",
+                                      activeforeground="#232323",
+                                      disabledforeground="#4E4E7B",
+                                      relief="flat")
+        openWallet.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=W)
         #unlock wallet
         #open wallet
         # show keys
