@@ -40,7 +40,8 @@ def getCleosCommand():
 # Logic functions
 def getProducerInfo():
     try:
-        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'], timeout=TIMEOUT, stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'info'],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
@@ -55,7 +56,8 @@ def getProducerInfo():
 def getBlockInfo():
     try:
         out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
-                                      'get', 'block', app.tabPanel.blockNumber.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                      'get', 'block', app.tabPanel.blockNumber.get()],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
@@ -70,7 +72,8 @@ def getBlockInfo():
 def getBlockProducers():
     try:
         out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(),
-                                      'system', 'listproducers'], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                      'system', 'listproducers'],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
@@ -84,7 +87,8 @@ def getBlockProducers():
 
 def getWalletList():
     try:
-        out = subprocess.run(cleos + ['wallet', 'list'], timeout=TIMEOUT, stdout=subprocess.PIPE)
+        out = subprocess.run(cleos + ['wallet', 'list'],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
@@ -119,11 +123,13 @@ def createWallet():
         try:
             if toConsole == '--to-console':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--to-console'], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                              '--to-console'],
+                                     timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--file', "/root/" + app.tabPanel.walletName.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                              '--file', "/root/" + app.tabPanel.walletName.get()],
+                                     timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 out = out.stdout.decode('utf-8')
         except subprocess.TimeoutExpired as e:
             print(e)
@@ -141,11 +147,13 @@ def createWallet():
         try:
             if toConsole == '--to-console':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--to-console'], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                              '--to-console'],
+                                     timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 out = out.stdout.decode('utf-8')
             elif toConsole == '--file':
                 out = subprocess.run(cleos + ['wallet', 'create', '-n', app.tabPanel.walletName.get(),
-                                              '--file', walletDir + "/" + app.tabPanel.walletName.get()], timeout=TIMEOUT, stdout=subprocess.PIPE)
+                                              '--file', walletDir + "/" + app.tabPanel.walletName.get()],
+                                     timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
                 out = out.stdout.decode('utf-8')
         except subprocess.TimeoutExpired as e:
             print(e)
@@ -161,8 +169,7 @@ def createWallet():
 def openWallet():
     try:
         out = subprocess.run(cleos + ['wallet', 'open', '-n', app.tabPanel.openWalletName.get()],
-                             timeout=TIMEOUT,
-                             stdout=subprocess.PIPE)
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
         out = out.stdout.decode('utf-8')
     except subprocess.TimeoutExpired as e:
         print(e)
@@ -176,17 +183,78 @@ def openWallet():
         app.outputPanel.logger(out)
 
 
-def unlockWallet():
-    app.outputPanel.logger("pass")
+def unlockWallet(password):
+    try:
+        out = subprocess.run(cleos + ['wallet', 'unlock', '-n', app.tabPanel.openWalletName.get(), '--password', password],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Unlock the wallet\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not unlock the wallet.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
 
 
 def showKeys():
-    app.outputPanel.logger("Pass")
+    try:
+        out = subprocess.run(cleos + ['wallet', 'keys'],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not show keys\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not show keys.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
 
 
-def showPrivateKeys():
-    app.outputPanel.logger("Pass")
+def showPrivateKeys(password):
+    try:
+        out = subprocess.run(cleos + ['wallet', 'private_keys', '-n', app.tabPanel.openWalletName.get(), '--password', password],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not show private keys\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not show private keys.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
 
 
-def importKey():
-    app.outputPanel.logger("Pass")
+def importKey(key):
+    try:
+        out = subprocess.run(cleos + ['wallet', 'import', '-n', app.tabPanel.openWalletName.get(), '--private-key', key],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not import the key\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not import the key.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def createKeys():
+    # TODO add --tofile feature
+    try:
+        out = subprocess.run(cleos + ['create', 'key', '--to-console'],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not create keys\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not create keys.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
