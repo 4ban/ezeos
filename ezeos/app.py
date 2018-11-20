@@ -258,3 +258,59 @@ def createKeys():
     finally:
         app.outputPanel.logger(out)
 
+
+def compileContract():
+    cpp = app.tabPanel.contractFileCPP.get()
+    wasm = app.tabPanel.contractFileWASM.get()
+    wast = app.tabPanel.contractFileWAST.get()
+    abi = app.tabPanel.contractFileABI.get()
+
+    try:
+        out = subprocess.run(['eosio-cpp', '-o', wasm, cpp, '--abigen'],
+                             timeout=TIMEOUT+60, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not compile contract\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not compile contract.\n' + str(e)
+    finally:
+        app.outputPanel.logger("Compile success\n\n" + out)
+
+    try:
+        out = subprocess.run(['eosio-cpp', '-o', wast, cpp, '--abigen'],
+                             timeout=TIMEOUT+60, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not compile contract\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not compile contract.\n' + str(e)
+    finally:
+        app.outputPanel.logger("Compile success\n\n" + out)
+
+def setContract():
+    cpp = app.tabPanel.contractFileCPP.get()
+    wasm = app.tabPanel.contractFileWASM.get()
+    wast = app.tabPanel.contractFileWAST.get()
+    abi = app.tabPanel.contractFileABI.get()
+
+    try:
+        out_code = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'set', 'code', app.tabPanel.accountName.get(), wasm],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out_abi = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'set', 'abi', app.tabPanel.accountName.get(), abi],
+            timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out_code = out_code.stdout.decode('utf-8')
+        out_abi = out_abi.stdout.decode('utf-8')
+        out = str(out_code) + str(out_abi)
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not set contract\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Could not set contract.\n' + str(e)
+    finally:
+        app.outputPanel.logger("Contract successfully pished to the net.\n\n" + out)
+

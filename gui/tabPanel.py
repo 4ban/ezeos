@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 from tkinter import *
 from tkinter import ttk
 from tkinter import simpledialog
+from tkinter import filedialog
+# import ttkthemes
 from ezeos import MAIN_PRODUCERS
 from ezeos import TEST_PRODUCERS
 import ezeos.app as ezeos
@@ -23,6 +26,10 @@ class TabPanel(object):
 
         # Variables tab 3
         # Variables tab 4
+        self.contractFileCPP = StringVar()
+        self.contractFileWASM = StringVar()
+        self.contractFileWAST = StringVar()
+        self.contractFileABI = StringVar()
 
         self.tabPanel()
         self.fillTab1()
@@ -85,7 +92,7 @@ class TabPanel(object):
         self.notebook.add(self.tab4, text='Contracts')
 
         self.notebook.pack(expand=True, fill='both')
-        self.notebook.select(self.tab2)
+        self.notebook.select(self.tab4)
 
     def fillTab1(self):
         self.netState.set(2)
@@ -520,7 +527,64 @@ class TabPanel(object):
         pass
 
     def fillTab4(self):
-        pass
+        # Contract operations
+        self.contractFrame = LabelFrame(self.tab4,
+                                 text="Contract operations",
+                                 background="#2D2D46",
+                                 foreground='#dfdfdf',
+                                 borderwidth=2)
+        self.contractFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+
+        # Open contract
+        openContract = Button(self.contractFrame,
+                                      text="Open contract",
+                                      command=self.openContract,
+                                      background="#4E4E7B",
+                                      foreground="#dfdfdf",
+                                      highlightbackground="#2D2D46",
+                                      highlightcolor="#2D2D46",
+                                      highlightthickness=0,
+                                      borderwidth=0,
+                                      height=1,
+                                      activebackground="#c9c9d7",
+                                      activeforeground="#232323",
+                                      disabledforeground="#4E4E7B",
+                                      relief="flat")
+        openContract.grid(row=0, column=0, padx=5, ipady=5, sticky=EW)
+
+        # Compile contract
+        compileContract = Button(self.contractFrame,
+                              text="Compile contract",
+                              command=ezeos.compileContract,
+                              background="#4E4E7B",
+                              foreground="#dfdfdf",
+                              highlightbackground="#2D2D46",
+                              highlightcolor="#2D2D46",
+                              highlightthickness=0,
+                              borderwidth=0,
+                              height=1,
+                              activebackground="#c9c9d7",
+                              activeforeground="#232323",
+                              disabledforeground="#4E4E7B",
+                              relief="flat")
+        compileContract.grid(row=0, column=1, padx=5, ipady=5, sticky=EW)
+
+        # Set contract
+        setContract = Button(self.contractFrame,
+                                 text="Set contract",
+                                 command=ezeos.setContract,
+                                 background="#4E4E7B",
+                                 foreground="#dfdfdf",
+                                 highlightbackground="#2D2D46",
+                                 highlightcolor="#2D2D46",
+                                 highlightthickness=0,
+                                 borderwidth=0,
+                                 height=1,
+                                 activebackground="#c9c9d7",
+                                 activeforeground="#232323",
+                                 disabledforeground="#4E4E7B",
+                                 relief="flat")
+        setContract.grid(row=0, column=2, padx=5, ipady=5, sticky=EW)
 
     def update_tab1(self):
         if self.netState.get() == 1:
@@ -559,7 +623,33 @@ class TabPanel(object):
         else:
             self.parent.log("Something went wrong!")
 
+    def openContract(self):
+        # self.style = ttkthemes.ThemedStyle()
+        # self.style.theme_use('ubuntu')
+        filetypes = [('cpp', '.cpp')]
+        file = filedialog.askopenfilename(parent=self.contractFrame,
+                                          initialdir=os.getenv("HOME"),
+                                          title="Please select a contract:",
+                                          filetypes=filetypes)
+        if file is not None:
+            # self.style.theme_use('default')
+            self.contractFileCPP.set(file)
+            self.contractFileWASM.set(file.replace('.cpp', '.wasm'))
+            self.contractFileWAST.set(file.replace('.cpp', '.wast'))
+            self.contractFileABI.set(file.replace('.cpp', '.abi'))
+            self.parent.log("Opened contract:\n\n"+self.contractFileCPP.get())
+        else:
+            self.parent.log("Something went wrong!")
+
     # delete
     def test(self):
         mes = self.toConsole.get()+" "+self.walletName.get()
         self.parent.log(mes)
+
+    def themeChooser(self):
+        # TODO under development
+        # self.style = ttkthemes.ThemedStyle()
+        # for i, name in enumerate(sorted(self.style.theme_names())):
+        #     b = ttk.Button(self.tab4, text=name, command=lambda name=name: self.tab4.theme_use(name))
+        #     b.grid()
+        pass
