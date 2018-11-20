@@ -1,9 +1,12 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-import os
+import os, subprocess
 
-VERSION = "v0.0.1"
+DOCKER_CONTAINER_NAME = 'eos'
+TIMEOUT = 3
+VERSION = "EZEOS v0.0.1"
+CDT_VERSION = subprocess.run(['eosio-cpp', '-version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=TIMEOUT).stdout.decode('utf-8').strip()
 EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
 CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
@@ -17,8 +20,6 @@ EZEOS = '''
 |______| /_____| |______|  \____/  |_____/
 '''
 
-DOCKER_CONTAINER_NAME = 'eos'
-TIMEOUT = 3
 MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
                   'https://eos.greymass.com:443',

@@ -7,6 +7,7 @@ from gui.menuBar import MenuBar
 from gui.outputPanel import OutputPanel
 from ezeos import EZEOS
 from ezeos import VERSION
+from ezeos import CDT_VERSION
 
 
 class UI(object):
@@ -24,7 +25,7 @@ class UI(object):
         # Add status bar
         self.status = StatusBar(self.root)
         self.status.pack(side=TOP, fill=X)
-        self.setstatus(VERSION)
+        self.setstatus(VERSION + " | " + CDT_VERSION)
         # Add output panel
         self.outputPanel = OutputPanel(self)
         # Create Logger

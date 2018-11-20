@@ -92,7 +92,7 @@ class TabPanel(object):
         self.notebook.add(self.tab4, text='Contracts')
 
         self.notebook.pack(expand=True, fill='both')
-        self.notebook.select(self.tab4)
+        self.notebook.select(self.tab3)
 
     def fillTab1(self):
         self.netState.set(2)
