@@ -623,15 +623,14 @@ class TabPanel(object):
             self.parent.log("Something went wrong!")
 
     def openContract(self):
-        # self.style = ttkthemes.ThemedStyle()
-        # self.style.theme_use('ubuntu')
-        filetypes = [('cpp', '.cpp')]
+        # self.parent.style.theme_use('ubuntu')
+        filetypes = [('C++', '.cpp')]
         file = filedialog.askopenfilename(parent=self.contractFrame,
                                           initialdir=os.getenv("HOME"),
                                           title="Please select a contract:",
                                           filetypes=filetypes)
         if file is not None:
-            # self.style.theme_use('default')
+            # self.parent.style.theme_use('default')
             self.contractFileCPP.set(file)
             self.contractFileWASM.set(file.replace('.cpp', '.wasm'))
             self.contractFileWAST.set(file.replace('.cpp', '.wast'))
