@@ -6,7 +6,11 @@ import os, subprocess
 DOCKER_CONTAINER_NAME = 'eos'
 TIMEOUT = 3
 VERSION = "EZEOS v0.0.1"
-CDT_VERSION = subprocess.run(['eosio-cpp', '-version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=TIMEOUT).stdout.decode('utf-8').strip()
+try:
+    CDT_VERSION = subprocess.run(['eosio-cpp', '-version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=TIMEOUT).stdout.decode('utf-8').strip()
+except FileNotFoundError as e:
+    print(e)
+    CDT_VERSION = "EOSIO-CDT not installed"
 EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
 CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
