@@ -6,7 +6,6 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import simpledialog
 from tkinter import filedialog
-# import ttkthemes
 from ezeos import MAIN_PRODUCERS
 from ezeos import TEST_PRODUCERS
 import ezeos.app as ezeos
@@ -646,10 +645,3 @@ class TabPanel(object):
         mes = self.toConsole.get()+" "+self.walletName.get()
         self.parent.log(mes)
 
-    def themeChooser(self):
-        # TODO under development
-        # self.style = ttkthemes.ThemedStyle()
-        # for i, name in enumerate(sorted(self.style.theme_names())):
-        #     b = ttk.Button(self.tab4, text=name, command=lambda name=name: self.tab4.theme_use(name))
-        #     b.grid()
-        pass

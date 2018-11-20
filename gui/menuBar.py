@@ -49,3 +49,21 @@ class MenuBar(object):
 
         # Attach menu
         self.parent.root.config(menu=menubar)
+
+        # Theme menu
+        thememenu = Menu(menubar,
+                        tearoff=0,
+                        bg="#2D2D46",
+                        fg="#dfdfdf",
+                        activebackground='#4E4E7B',
+                        activeforeground='#dfdfdf',
+                        bd=0)
+
+        for i, name in enumerate(sorted(self.parent.style.theme_names())):
+            thememenu.add_command(label=name, command=lambda name=name: self.parent.style.theme_use(name))
+        # Add menus to menubar
+        menubar.add_cascade(label="Theme", menu=thememenu)
+
+        # Attach menu
+        self.parent.root.config(menu=menubar)
+

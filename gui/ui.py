@@ -2,6 +2,8 @@
 # coding: utf-8
 
 from tkinter import *
+from tkinter import ttk
+import ttkthemes
 from gui.tabPanel import TabPanel
 from gui.menuBar import MenuBar
 from gui.outputPanel import OutputPanel
@@ -20,6 +22,7 @@ class UI(object):
                          highlightbackground="#2D2D46",
                          highlightcolor="#2D2D46",
                          highlightthickness=7)
+        self.style = ttkthemes.ThemedStyle()
         # Add menubar
         self.menuBar = MenuBar(self)
         # Add status bar
@@ -33,6 +36,7 @@ class UI(object):
         self.log(EZEOS)
         # Add Tab panel
         self.tabPanel = TabPanel(self)
+
 
     def setstatus(self, message):
         self.status.clear()
