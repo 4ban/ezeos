@@ -276,7 +276,10 @@ def compileContract():
         print(e)
         out = 'Could not compile contract.\n' + str(e)
     finally:
-        app.outputPanel.logger("Compile success\n\n" + out)
+        if 'error' in out:
+            app.outputPanel.logger(out)
+        else:
+            app.outputPanel.logger("Compile successful\n\n" + out)
 
     try:
         out = subprocess.run(['eosio-cpp', '-o', wast, cpp, '--abigen'],
@@ -289,7 +292,10 @@ def compileContract():
         print(e)
         out = 'Could not compile contract.\n' + str(e)
     finally:
-        app.outputPanel.logger("Compile success\n\n" + out)
+        if 'error' in out:
+            app.outputPanel.logger(out)
+        else:
+            app.outputPanel.logger("Compile successful\n\n" + out)
 
 def setContract():
     cpp = app.tabPanel.contractFileCPP.get()

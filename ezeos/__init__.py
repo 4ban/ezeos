@@ -6,6 +6,11 @@ import os, subprocess
 DOCKER_CONTAINER_NAME = 'eos'
 TIMEOUT = 3
 VERSION = "EZEOS v0.0.1"
+
+CONTRACT_FOLDER = os.environ['HOME'] + '/code/volentix/contracts'
+if not os.path.exists(CONTRACT_FOLDER):
+    CONTRACT_FOLDER = os.getenv("HOME")
+
 try:
     CDT_VERSION = subprocess.run(['eosio-cpp', '-version'], stdout=subprocess.PIPE, stderr=subprocess.STDOUT, timeout=TIMEOUT).stdout.decode('utf-8').strip()
 except FileNotFoundError as e:

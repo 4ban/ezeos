@@ -8,6 +8,7 @@ from tkinter import simpledialog
 from tkinter import filedialog
 from ezeos import MAIN_PRODUCERS
 from ezeos import TEST_PRODUCERS
+from ezeos import CONTRACT_FOLDER
 import ezeos.app as ezeos
 
 
@@ -626,7 +627,7 @@ class TabPanel(object):
         # self.parent.style.theme_use('ubuntu')
         filetypes = [('C++', '.cpp')]
         file = filedialog.askopenfilename(parent=self.contractFrame,
-                                          initialdir=os.getenv("HOME"),
+                                          initialdir=CONTRACT_FOLDER,
                                           title="Please select a contract:",
                                           filetypes=filetypes)
         if file is not None:
