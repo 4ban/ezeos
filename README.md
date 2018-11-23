@@ -65,3 +65,6 @@ Small note: If editing the README, please conform to the [standard-readme](https
 ## License
 
 MIT © 2018 VolentixLabs
+
+## Cross repo
+[Volentix ezeos](https://github.com/Volentix/ezeos2)
