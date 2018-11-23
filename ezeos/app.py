@@ -297,6 +297,7 @@ def compileContract():
         else:
             app.outputPanel.logger("Compile successful\n\n" + out)
 
+
 def setContract():
     cpp = app.tabPanel.contractFileCPP.get()
     wasm = app.tabPanel.contractFileWASM.get()
@@ -320,3 +321,90 @@ def setContract():
     finally:
         app.outputPanel.logger("Contract successfully pished to the net.\n\n" + out)
 
+
+def getAccountBalance():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get() ,'get', 'currency', 'balance', 'eosio.token', app.tabPanel.accountName.get()],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account balance\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account balance. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def getAccountDetails():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get() ,'get', 'account', app.tabPanel.accountName.get()],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account details\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account details. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def getAccountActions():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'actions', app.tabPanel.accountName.get()],
+            timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account actions\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account actions. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def getAccountCode():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'code', app.tabPanel.accountName.get()],
+            timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account code\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account code. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+def getAccountAbi():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'abi', app.tabPanel.accountName.get()],
+            timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account abi\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account abi. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+def getAccountTable():
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'table', app.tabPanel.accountName.get(), app.tabPanel.accountScope.get(), app.tabPanel.accountTable.get(), '-L', app.tabPanel.accountLower.get(), '-l', app.tabPanel.accountLimit.get()],
+            timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not get account table\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get account table. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)

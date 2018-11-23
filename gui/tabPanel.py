@@ -15,16 +15,24 @@ import ezeos.app as ezeos
 class TabPanel(object):
     def __init__(self, parent):
         self.parent = parent
+
         # Variables tab 1
         self.netState = IntVar()
         self.producer = StringVar()
         self.blockNumber = StringVar()
+
         # Variables tab 2
         self.toConsole = StringVar()
         self.walletName = StringVar()
         self.openWalletName = StringVar()
 
         # Variables tab 3
+        self.accountName = StringVar()
+        self.accountScope = StringVar()
+        self.accountTable = StringVar()
+        self.accountLower = IntVar()
+        self.accountLimit = IntVar()
+
         # Variables tab 4
         self.contractFileCPP = StringVar()
         self.contractFileWASM = StringVar()
@@ -92,7 +100,7 @@ class TabPanel(object):
         self.notebook.add(self.tab4, text='Contracts')
 
         self.notebook.pack(expand=True, fill='both')
-        self.notebook.select(self.tab3)
+        # self.notebook.select(self.tab3)
 
     def fillTab1(self):
         self.netState.set(2)
@@ -500,31 +508,186 @@ class TabPanel(object):
                                  relief="flat")
         importPrivateKeys.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=EW)
 
-
-
-
-        #unlock wallet
-        # import keys
-
-        # # delete
-        # testBtn2 = Button(self.tab2,
-        #                   text="test",
-        #                   command=self.test,
-        #                   background="#232323",
-        #                   foreground="#dfdfdf",
-        #                   highlightbackground="#2D2D46",
-        #                   highlightcolor="#2D2D46",
-        #                   highlightthickness=0,
-        #                   borderwidth=0,
-        #                   height=1,
-        #                   activebackground="#c9c9d7",
-        #                   activeforeground="#232323",
-        #                   disabledforeground="#4E4E7B",
-        #                   relief="flat")
-        # testBtn2.grid(row=4, column=3, padx=5, pady=5)
-
     def fillTab3(self):
-        pass
+        # Account operations
+        self.accountFrame = LabelFrame(self.tab3,
+                                        text="Account details",
+                                        background="#2D2D46",
+                                        foreground='#dfdfdf',
+                                        borderwidth=2)
+        self.accountFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+        # set account name
+        accountNameLabel = Label(self.accountFrame, text="Account name: ",
+                                background="#2D2D46",
+                                foreground="#dfdfdf")
+        accountNameLabel.grid(row=0, column=0)
+
+        self.accountName = Entry(self.accountFrame, width=20,
+                                background="#dfdfdf",
+                                foreground="#232323",
+                                highlightthickness=0,
+                                borderwidth=0)
+        self.accountName.insert(END, 'volentixfrst')
+        self.accountName.grid(row=0, column=1, ipady=3, ipadx=3)
+
+        # get account balance
+        accountBalance = Button(self.accountFrame,
+                            text="Get account balance",
+                            command=ezeos.getAccountBalance,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        accountBalance.grid(row=0, column=2, padx=5, pady=5, ipady=5, sticky=EW)
+
+        # get account details
+        accountDetails = Button(self.accountFrame,
+                                text="Get account details",
+                                command=ezeos.getAccountDetails,
+                                background="#4E4E7B",
+                                foreground="#dfdfdf",
+                                highlightbackground="#2D2D46",
+                                highlightcolor="#2D2D46",
+                                highlightthickness=0,
+                                borderwidth=0,
+                                height=1,
+                                activebackground="#c9c9d7",
+                                activeforeground="#232323",
+                                disabledforeground="#4E4E7B",
+                                relief="flat")
+        accountDetails.grid(row=0, column=3, padx=5, pady=5, ipady=5, sticky=EW)
+
+        # get account actions
+        accountActions = Button(self.accountFrame,
+                                text="Get account actions",
+                                command=ezeos.getAccountActions,
+                                background="#4E4E7B",
+                                foreground="#dfdfdf",
+                                highlightbackground="#2D2D46",
+                                highlightcolor="#2D2D46",
+                                highlightthickness=0,
+                                borderwidth=0,
+                                height=1,
+                                activebackground="#c9c9d7",
+                                activeforeground="#232323",
+                                disabledforeground="#4E4E7B",
+                                relief="flat")
+        accountActions.grid(row=0, column=4, padx=5, pady=5, ipady=5, sticky=EW)
+
+        # get account code
+        accountCode = Button(self.accountFrame,
+                                text="Get account code",
+                                command=ezeos.getAccountCode,
+                                background="#4E4E7B",
+                                foreground="#dfdfdf",
+                                highlightbackground="#2D2D46",
+                                highlightcolor="#2D2D46",
+                                highlightthickness=0,
+                                borderwidth=0,
+                                height=1,
+                                activebackground="#c9c9d7",
+                                activeforeground="#232323",
+                                disabledforeground="#4E4E7B",
+                                relief="flat")
+        accountCode.grid(row=0, column=5, padx=5, pady=5, ipady=5, sticky=EW)
+
+        # get account abi
+        accountAbi = Button(self.accountFrame,
+                             text="Get account abi",
+                             command=ezeos.getAccountAbi,
+                             background="#4E4E7B",
+                             foreground="#dfdfdf",
+                             highlightbackground="#2D2D46",
+                             highlightcolor="#2D2D46",
+                             highlightthickness=0,
+                             borderwidth=0,
+                             height=1,
+                             activebackground="#c9c9d7",
+                             activeforeground="#232323",
+                             disabledforeground="#4E4E7B",
+                             relief="flat")
+        accountAbi.grid(row=0, column=6, padx=5, pady=5, ipady=5, sticky=EW)
+
+        ttk.Separator(self.accountFrame).grid(row=1, column=0, columnspan=10, sticky="ew")
+        # set scope name
+        accountScopeLabel = Label(self.accountFrame, text="Scope name: ",
+                                 background="#2D2D46",
+                                 foreground="#dfdfdf")
+        accountScopeLabel.grid(row=2, column=0)
+
+        self.accountScope = Entry(self.accountFrame, width=20,
+                                 background="#dfdfdf",
+                                 foreground="#232323",
+                                 highlightthickness=0,
+                                 borderwidth=0)
+        self.accountScope.insert(END, self.accountName.get())
+        self.accountScope.grid(row=2, column=1, pady=5, ipady=3, ipadx=3)
+
+        # set table name
+        accountTableLabel = Label(self.accountFrame, text="Table name: ",
+                                  background="#2D2D46",
+                                  foreground="#dfdfdf")
+        accountTableLabel.grid(row=3, column=0)
+
+        self.accountTable = Entry(self.accountFrame, width=20,
+                                  background="#dfdfdf",
+                                  foreground="#232323",
+                                  highlightthickness=0,
+                                  borderwidth=0)
+        self.accountTable.insert(END, 'entry')
+        self.accountTable.grid(row=3, column=1, pady=5, ipady=3, ipadx=3)
+
+        # set lower
+        accountLowerLabel = Label(self.accountFrame, text="Lower bound: ",
+                                  background="#2D2D46",
+                                  foreground="#dfdfdf")
+        accountLowerLabel.grid(row=4, column=0)
+
+        self.accountLower = Entry(self.accountFrame, width=20,
+                                  background="#dfdfdf",
+                                  foreground="#232323",
+                                  highlightthickness=0,
+                                  borderwidth=0)
+        self.accountLower.insert(END, 0)
+        self.accountLower.grid(row=4, column=1, pady=5, ipady=3, ipadx=3)
+
+        # set limit
+        accountLimitLabel = Label(self.accountFrame, text="Limit: ",
+                                  background="#2D2D46",
+                                  foreground="#dfdfdf")
+        accountLimitLabel.grid(row=5, column=0)
+
+        self.accountLimit = Entry(self.accountFrame, width=20,
+                                  background="#dfdfdf",
+                                  foreground="#232323",
+                                  highlightthickness=0,
+                                  borderwidth=0)
+        self.accountLimit.insert(END, 5)
+        self.accountLimit.grid(row=5, column=1, pady=5, ipady=3, ipadx=3)
+
+        # get account table
+        accountTable = Button(self.accountFrame,
+                            text="Get account table",
+                            command=ezeos.getAccountTable,
+                            background="#4E4E7B",
+                            foreground="#dfdfdf",
+                            highlightbackground="#2D2D46",
+                            highlightcolor="#2D2D46",
+                            highlightthickness=0,
+                            borderwidth=0,
+                            height=1,
+                            activebackground="#c9c9d7",
+                            activeforeground="#232323",
+                            disabledforeground="#4E4E7B",
+                            relief="flat")
+        accountTable.grid(row=2, column=2, rowspan=4, padx=5, pady=5, ipady=5, sticky=EW)
 
     def fillTab4(self):
         # Contract operations
@@ -644,4 +807,3 @@ class TabPanel(object):
     def test(self):
         mes = self.toConsole.get()+" "+self.walletName.get()
         self.parent.log(mes)
-
