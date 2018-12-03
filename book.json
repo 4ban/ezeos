@@ -9,12 +9,12 @@
     "edit-link": {
       "base": "https://github.com/4ban/ezeos/tree/master/docs",
       "label": "Edit This Page",
-      "theme-gestalt": {
-        "excludeDefaultStyles": true
-      }
     },
     "github": {
       "url": "https://github.com/4ban/ezeos"
+    },
+    "theme-gestalt": {
+        "excludeDefaultStyles": true
     }
   },
   "links": {
