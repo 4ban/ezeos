@@ -1,12 +1,3 @@
 {
-  "root": "./docs",
-  "plugins": [
-    "edit-link"
-  ],
-  "pluginsConfig": {
-    "edit-link": {
-      "base": "https://github.com/4ban/ezeos/tree/master/docs",
-      "label": "Edit This Page",
-    }
-  }
+  "root": "./docs"
 }
