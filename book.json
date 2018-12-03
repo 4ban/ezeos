@@ -2,7 +2,10 @@
   "root": "./docs",
   "plugins": [
     "edit-link",
-    "github"
+    "github",
+    "theme-gestalt", 
+    "-theme-default", 
+    "styles-sass-fix"
   ],
   "pluginsConfig": {
     "edit-link": {
