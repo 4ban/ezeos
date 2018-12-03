@@ -2,7 +2,7 @@
   "root": "./docs",
   "plugins": [
     "edit-link",
-    "theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git",
+    "theme-gestalt", "-theme-default", "styles-sass-fix",
     "github"
   ],
   "pluginsConfig": {
