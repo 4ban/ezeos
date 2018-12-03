@@ -1,0 +1,23 @@
+{
+"root": "./docs",
+"plugins": [
+"edit-link",
+"theme-vuejs@git+https://github.com/pearofducks/gitbook-plugin-theme-vuejs.git",
+"github",
+],
+"pluginsConfig": {
+"edit-link": {
+"base": "https://github.com/4ban/ezeos/tree/master/docs",
+"label": "Edit This Page"
+},
+"github": {
+"url": "https://github.com/4ban/ezeos"
+},
+},
+"links": {
+"sharing": {
+"facebook": false,
+"twitter": true
+}
+}
+}
