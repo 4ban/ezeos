@@ -2,7 +2,6 @@
   "root": "./docs",
   "plugins": [
     "edit-link",
-    "theme-gestalt", "-theme-default", "styles-sass-fix",
     "github"
   ],
   "pluginsConfig": {
@@ -12,9 +11,6 @@
     },
     "github": {
       "url": "https://github.com/4ban/ezeos"
-    },
-    "theme-gestalt": {
-        "excludeDefaultStyles": true
     }
   },
   "links": {
