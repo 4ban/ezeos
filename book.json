@@ -1,25 +1,12 @@
 {
   "root": "./docs",
   "plugins": [
-    "edit-link",
-    "github",
-    "theme-gestalt", 
-    "-theme-default", 
-    "styles-sass-fix"
+    "edit-link"
   ],
   "pluginsConfig": {
     "edit-link": {
       "base": "https://github.com/4ban/ezeos/tree/master/docs",
       "label": "Edit This Page",
-    },
-    "github": {
-      "url": "https://github.com/4ban/ezeos"
-    }
-  },
-  "links": {
-    "sharing": {
-      "facebook": false,
-      "twitter": true
     }
   }
 }
