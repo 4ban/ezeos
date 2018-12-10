@@ -4,6 +4,7 @@
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
 [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](http://makeapullrequest.com)
 [![MIT Licence](https://badges.frapsoft.com/os/mit/mit.png?v=103)](https://opensource.org/licenses/mit-license.php)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2F4ban%2Fezeos.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2F4ban%2Fezeos?ref=badge_shield)
 
 #### _A simple testing/learning tool for EOS._
 
