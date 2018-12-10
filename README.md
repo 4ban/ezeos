@@ -67,7 +67,6 @@ Small note: If editing the README, please conform to the [standard-readme](https
 
 MIT © 2018 VolentixLabs
 
-
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2F4ban%2Fezeos.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2F4ban%2Fezeos?ref=badge_large)
 
 ## Cross repo
