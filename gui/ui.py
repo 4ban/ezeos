@@ -7,9 +7,9 @@ import ttkthemes
 from gui.tabPanel import TabPanel
 from gui.menuBar import MenuBar
 from gui.outputPanel import OutputPanel
-from ezeos import EZEOS
-from ezeos import VERSION
-from ezeos import CDT_VERSION
+from core import EZEOS
+from core import VERSION
+from core import CDT_VERSION
 
 
 class UI(object):

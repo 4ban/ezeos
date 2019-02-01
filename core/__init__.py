@@ -18,7 +18,7 @@ except FileNotFoundError as e:
     CDT_VERSION = "EOSIO-CDT not installed"
 EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
-CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
+CONFIG_PATH = os.path.join(ROOT_DIR, 'core.conf')
 
 EZEOS = '''
  ______   ______  ______    ____     _____

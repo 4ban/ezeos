@@ -3,9 +3,7 @@
 
 import os
 from tkinter import *
-from PIL import Image
-from PIL import ImageTk
-from ezeos import ROOT_DIR
+from core import ROOT_DIR
 
 
 class MenuBar(object):
@@ -20,10 +18,10 @@ class MenuBar(object):
                        activebackground='#4E4E7B',
                        activeforeground='#dfdfdf',
                        bd=0)
-        # Set logo
-        logo = Image.open(os.path.join(ROOT_DIR, "resources/icon.png"))
-        logo = logo.resize((20, 20), Image.ANTIALIAS)
-        self.logo = ImageTk.PhotoImage(logo)
+        # # Set logo
+        # logo = Image.open(os.path.join(ROOT_DIR, "resources/icon.png"))
+        # logo = logo.resize((20, 20), Image.ANTIALIAS)
+        # self.logo = ImageTk.PhotoImage(logo)
 
         # File menu
         filemenu = Menu(menubar,
@@ -44,7 +42,8 @@ class MenuBar(object):
                         bd=0)
         helpmenu.add_command(label="About", command=self.parent.about)
         # Add menus to menubar
-        menubar.add_cascade(label="Ezeos", image=self.logo, menu=filemenu)
+        # menubar.add_cascade(label="Ezeos", image=self.logo, menu=filemenu)
+        menubar.add_cascade(label="Ezeos", menu=filemenu)
         menubar.add_cascade(label="Help", menu=helpmenu)
 
         # Attach menu

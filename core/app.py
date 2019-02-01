@@ -3,8 +3,8 @@
 
 from tkinter import Tk
 from gui.ui import UI
-from ezeos import DOCKER_CONTAINER_NAME
-from ezeos import TIMEOUT
+from core import DOCKER_CONTAINER_NAME
+from core import TIMEOUT
 import subprocess
 import os
 
@@ -179,7 +179,7 @@ def openWallet():
         out = 'Could not open the wallet.\n' + str(e)
     finally:
         if 'Opened' in out:
-            out += "\nRemember this wallet as default for this ezeos session!"
+            out += "\nRemember this wallet as default for this core session!"
         app.outputPanel.logger(out)
 
 

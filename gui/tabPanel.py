@@ -6,10 +6,10 @@ from tkinter import *
 from tkinter import ttk
 from tkinter import simpledialog
 from tkinter import filedialog
-from ezeos import MAIN_PRODUCERS
-from ezeos import TEST_PRODUCERS
-from ezeos import CONTRACT_FOLDER
-import ezeos.app as ezeos
+from core import MAIN_PRODUCERS
+from core import TEST_PRODUCERS
+from core import CONTRACT_FOLDER
+import core.app as ezeos
 
 
 class TabPanel(object):

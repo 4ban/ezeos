@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-from ezeos.app import run
+from core.app import run
 
 
 if __name__ == '__main__':
