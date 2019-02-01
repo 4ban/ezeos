@@ -16,6 +16,9 @@ def run():
     # Application
     getCleosCommand()
     # print(app.tabPanel.producer.get())
+    root.lift()
+    root.attributes('-topmost', True)
+    root.attributes('-topmost', False)
     root.mainloop()
 
 
@@ -33,8 +36,7 @@ def getCleosCommand():
     except Exception as e:
         cleos = ['cleos']
     else:
-        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME,
-                 '/opt/eosio/bin/cleos']
+        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME, '/opt/eosio/bin/cleos']
 
 
 # Logic functions
