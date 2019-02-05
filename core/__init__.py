@@ -30,7 +30,7 @@ EZEOS = '''
 |______| /_____| |______|  \____/  |_____/
 '''
 
-MAIN_PRODUCERS = ['MAIN PRODUCER',
+MAIN_PRODUCERS = ['PRODUCER',
                   'https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
                   'http://35.183.49.71:8888',
@@ -63,7 +63,7 @@ MAIN_PRODUCERS = ['MAIN PRODUCER',
                   'https://api.eosn.io',
                   'https://eu1.eosdac.io:443']
 
-TEST_PRODUCERS = ['TEST PRODUCER',
+TEST_PRODUCERS = ['PRODUCER',
                   'http://api.kylin.alohaeos.com',
                   'http://127.0.0.1:8888',
                   'http://35.183.129.78:8080']

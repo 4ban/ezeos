@@ -110,7 +110,7 @@ class TabPanel(object):
 
     def fillTab1(self):
         self.netState.set(2)
-        self.producer.set(TEST_PRODUCERS[0])
+
         # TODO move everything to the label frames
         # network
         # networkFrame = LabelFrame(self.tab1,
