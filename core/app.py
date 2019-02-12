@@ -5,8 +5,7 @@ from tkinter import Tk
 from gui.ui import UI
 from core import DOCKER_CONTAINER_NAME
 from core import TIMEOUT
-from core import btc
-from core import eth
+from core import btc, bhc, dash, eth, ltc, neo, xmr
 import subprocess
 import os
 import signal
@@ -400,6 +399,7 @@ def getAccountCode():
     finally:
         app.outputPanel.logger(out)
 
+
 def getAccountAbi():
     try:
         out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'get', 'abi', app.tabPanel.accountName.get()],
@@ -413,6 +413,7 @@ def getAccountAbi():
         out = "Could not get account abi. \n" + str(e)
     finally:
         app.outputPanel.logger(out)
+
 
 def getAccountTable():
     try:
@@ -428,6 +429,8 @@ def getAccountTable():
     finally:
         app.outputPanel.logger(out)
 
+
+# Currency operations
 def getBtcBalance(address):
     signal.signal(signal.SIGALRM, handler)
     signal.alarm(TIMEOUT)
@@ -441,6 +444,7 @@ def getBtcBalance(address):
         out = 'Can not get BTC balance.\n' + str(e)
     finally:
         app.outputPanel.logger(out)
+
 
 def getEthBalance(address):
     signal.signal(signal.SIGALRM, handler)
@@ -457,17 +461,22 @@ def getEthBalance(address):
     finally:
         app.outputPanel.logger(out)
 
+
 def getXmrBalance(address):
     pass
+
 
 def getNeoBalance(address):
     pass
 
+
 def getLtcBalance(address):
     pass
 
+
 def getBchBalance(address):
     pass
+
 
 def getDashBalance(address):
     pass
