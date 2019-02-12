@@ -23,20 +23,30 @@ def run():
 
 
 def getCleosCommand():
+    # TODO The docker has to be removed since was deprecated.
     global DOCKER_COMMAND
 
     DOCKER_COMMAND = ['docker', 'exec', DOCKER_CONTAINER_NAME]
     CLEOS_COMMAND = ['/opt/eosio/bin/cleos', '-h']
     global cleos
 
+    # try:
+    #     subprocess.check_output(DOCKER_COMMAND+CLEOS_COMMAND)
+    # except OSError as e:
+    #     cleos = ['cleos']
+    # except Exception as e:
+    #     cleos = ['cleos']
+    # else:
+    #     cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME, '/opt/eosio/bin/cleos']
+
     try:
-        subprocess.check_output(DOCKER_COMMAND+CLEOS_COMMAND)
+        subprocess.check_output(['cleos', '-h'])
     except OSError as e:
-        cleos = ['cleos']
+        app.outputPanel.logger('Can not find the cleos command.\n' + str(e))
     except Exception as e:
-        cleos = ['cleos']
+        app.outputPanel.logger('Something went wrong \n' + str(e))
     else:
-        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME, '/opt/eosio/bin/cleos']
+        cleos = ['cleos']
 
 
 # Logic functions
