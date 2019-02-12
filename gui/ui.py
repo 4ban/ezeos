@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
+import os
 from tkinter import *
 from tkinter import ttk
 from gui.tabPanel import TabPanel
@@ -10,6 +11,9 @@ from core import EZEOS
 from core import VERSION
 from core import CDT_VERSION
 from core import THEME
+from PIL import Image
+from PIL import ImageTk
+from core import ROOT_DIR
 
 
 class UI(object):
@@ -17,33 +21,29 @@ class UI(object):
         self.root = root
         self.root.title("EZEOS")
         self.root.geometry('1200x700')
-        # self.root.config(bg="#2D2D46",
-        #                  bd=0,
-        #                  highlightbackground="#2D2D46",
-        #                  highlightcolor="#2D2D46",
-        #                  highlightthickness=7)
+
         try:
             import ttkthemes
             self.style = ttkthemes.ThemedStyle()
         except ModuleNotFoundError:
             self.style = ttk.Style()
 
-
         self.style.theme_use(THEME)
-        # Add menubar
-        self.menuBar = MenuBar(self)
+
         # Add status bar
         self.status = StatusBar(self.root)
         self.status.pack(side=TOP, fill=X)
         self.setstatus(VERSION + " | " + CDT_VERSION)
+        # Add menubar
+        self.menuBar = MenuBar(self)
+
+        # Add Tab panel
+        self.tabPanel = TabPanel(self)
         # Add output panel
         self.outputPanel = OutputPanel(self)
         # Create Logger
         self.log = self.outputPanel.logger
         self.log(EZEOS)
-        # Add Tab panel
-        self.tabPanel = TabPanel(self)
-
 
     def setstatus(self, message):
         self.status.clear()
@@ -56,15 +56,15 @@ class UI(object):
 class StatusBar(Frame):
     def __init__(self, root):
         Frame.__init__(self, root)
-        # self.label = Label(self, bd=0,
-        #                    height=1,
-        #                    relief=SUNKEN,
-        #                    highlightthickness=2,
-        #                    highlightbackground="#2D2D46",
-        #                    highlightcolor="#2D2D46",
-        #                    anchor=W,
-        #                    bg="#4E4E7B",
-        #                    fg="#dfdfdf")
+
+        # TODO setup the logo
+        # Set logo
+        # logo = Image.open(os.path.join(ROOT_DIR, "resources/icon.png"))
+        # logo = logo.resize((20, 20), Image.ANTIALIAS)
+        # self.logo = ImageTk.PhotoImage(logo)
+        # self.image = ttk.Label(self, image=self.logo, anchor=W)
+        # self.image.pack()
+
         self.label = ttk.Label(self, anchor=W)
         self.label.pack(fill=X)
 
