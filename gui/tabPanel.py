@@ -44,6 +44,7 @@ class TabPanel(object):
         self.fillTab2()
         self.fillTab3()
         self.fillTab4()
+        self.fillTab5()
 
     def tabPanel(self):
         self.notebook = ttk.Notebook(self.parent.root, height=1)
@@ -52,14 +53,16 @@ class TabPanel(object):
         self.tab2 = ttk.Frame(self.notebook)
         self.tab3 = ttk.Frame(self.notebook)
         self.tab4 = ttk.Frame(self.notebook)
+        self.tab5 = ttk.Frame(self.notebook)
 
         self.notebook.add(self.tab1, text='Block Chain')
         self.notebook.add(self.tab2, text='Wallets')
         self.notebook.add(self.tab3, text='Accounts')
         self.notebook.add(self.tab4, text='Contracts')
+        self.notebook.add(self.tab5, text='Currencies')
 
         self.notebook.pack(expand=True, fill='both')
-        # self.notebook.select(self.tab3)
+        self.notebook.select(self.tab5)
 
     def fillTab1(self):
         self.netState.set(2)
@@ -232,6 +235,78 @@ class TabPanel(object):
 
         setContract = ttk.Button(self.contractFrame, text="Set contract", command=ezeos.setContract)
         setContract.grid(row=0, column=2, padx=5, ipady=5, sticky=EW)
+
+    def fillTab5(self):
+        self.btc = "1DwzjjBvHCtr5Hn5kZs72KABfKnoFjJSMy"
+        self.eth = "0x0366BfD5eDd7C257f2dcf4d4f1AB6196F03A0Bf6"
+        self.xmr = "To Do"
+        self.ltc = "LiBqkbnoVeRnrXCNetNDftYCE7Q3DDeDPL"
+        self.bch = "CZ9bAtUBNkH3hzStsZr2283bRgPoGaqyuK"
+        self.dash = "Xnn7aVPqxkqs8gDLZq1sNEU9v5A17HskM9"
+        self.neo = "To do"
+
+        # BTC
+        self.btcFrame = ttk.LabelFrame(self.tab5, text="BTC")
+        self.btcFrame.grid(row=0, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        btcAddress = ttk.Entry(self.btcFrame)
+        btcAddress.insert(END, self.btc)
+        btcAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        btcGetBalance = ttk.Button(self.btcFrame, text="Get Balance", command=lambda: ezeos.getBtcBalance(btcAddress.get()))
+        btcGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # ETH
+        self.ethFrame = ttk.LabelFrame(self.tab5, text="ETH")
+        self.ethFrame.grid(row=0, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        ethAddress = ttk.Entry(self.ethFrame)
+        ethAddress.insert(END, self.eth)
+        ethAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        ethGetBalance = ttk.Button(self.ethFrame, text="Get Balance", command=lambda: ezeos.getEthBalance(ethAddress.get()))
+        ethGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # XMR
+        self.xmrFrame = ttk.LabelFrame(self.tab5, text="XMR")
+        self.xmrFrame.grid(row=0, column=2, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        xmrAddress = ttk.Entry(self.xmrFrame)
+        xmrAddress.insert(END, self.xmr)
+        xmrAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        xmrGetBalance = ttk.Button(self.xmrFrame, text="Get Balance", command=lambda: ezeos.getXmrBalance(xmrAddress.get()))
+        xmrGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # NEO
+        self.neoFrame = ttk.LabelFrame(self.tab5, text="NEO")
+        self.neoFrame.grid(row=0, column=3, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        neoAddress = ttk.Entry(self.neoFrame)
+        neoAddress.insert(END, self.neo)
+        neoAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        neoGetBalance = ttk.Button(self.neoFrame, text="Get Balance", command=lambda: ezeos.getNeoBalance(neoAddress.get()))
+        neoGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # LTC
+        self.ltcFrame = ttk.LabelFrame(self.tab5, text="LTC")
+        self.ltcFrame.grid(row=0, column=4, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        ltcAddress = ttk.Entry(self.ltcFrame)
+        ltcAddress.insert(END, self.ltc)
+        ltcAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        ltcGetBalance = ttk.Button(self.ltcFrame, text="Get Balance", command=lambda: ezeos.getLtcBalance(ltcAddress.get()))
+        ltcGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # BCH
+        self.bchFrame = ttk.LabelFrame(self.tab5, text="BCH")
+        self.bchFrame.grid(row=1, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        bchAddress = ttk.Entry(self.bchFrame)
+        bchAddress.insert(END, self.bch)
+        bchAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        bchGetBalance = ttk.Button(self.bchFrame, text="Get Balance", command=lambda: ezeos.getBchBalance(bchAddress.get()))
+        bchGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+
+        # DASH
+        self.dashFrame = ttk.LabelFrame(self.tab5, text="DASH")
+        self.dashFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        dashAddress = ttk.Entry(self.dashFrame)
+        dashAddress.insert(END, self.dash)
+        dashAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        dashGetBalance = ttk.Button(self.dashFrame, text="Get Balance", command=lambda: ezeos.getDashBalance(dashAddress.get()))
+        dashGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
 
     def update_tab1(self):
         if self.netState.get() == 1:
