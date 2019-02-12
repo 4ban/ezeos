@@ -6,6 +6,5 @@ __pycache__/
 *.py[cod]
 *$py.class
 test.py
-*.spec
 dist/
 build/

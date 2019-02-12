@@ -3,8 +3,8 @@
 
 from tkinter import Tk
 from gui.ui import UI
-from ezeos import DOCKER_CONTAINER_NAME
-from ezeos import TIMEOUT
+from core import DOCKER_CONTAINER_NAME
+from core import TIMEOUT
 import subprocess
 import os
 
@@ -16,25 +16,37 @@ def run():
     # Application
     getCleosCommand()
     # print(app.tabPanel.producer.get())
+    root.lift()
+    root.attributes('-topmost', True)
+    root.attributes('-topmost', False)
     root.mainloop()
 
 
 def getCleosCommand():
+    # TODO The docker has to be removed since was deprecated.
     global DOCKER_COMMAND
 
     DOCKER_COMMAND = ['docker', 'exec', DOCKER_CONTAINER_NAME]
     CLEOS_COMMAND = ['/opt/eosio/bin/cleos', '-h']
     global cleos
 
+    # try:
+    #     subprocess.check_output(DOCKER_COMMAND+CLEOS_COMMAND)
+    # except OSError as e:
+    #     cleos = ['cleos']
+    # except Exception as e:
+    #     cleos = ['cleos']
+    # else:
+    #     cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME, '/opt/eosio/bin/cleos']
+
     try:
-        subprocess.check_output(DOCKER_COMMAND+CLEOS_COMMAND)
+        subprocess.check_output(['cleos', '-h'])
     except OSError as e:
-        cleos = ['cleos']
+        app.outputPanel.logger('Can not find the cleos command.\n' + str(e))
     except Exception as e:
-        cleos = ['cleos']
+        app.outputPanel.logger('Something went wrong \n' + str(e))
     else:
-        cleos = ['docker', 'exec', DOCKER_CONTAINER_NAME,
-                 '/opt/eosio/bin/cleos']
+        cleos = ['cleos']
 
 
 # Logic functions
@@ -179,7 +191,7 @@ def openWallet():
         out = 'Could not open the wallet.\n' + str(e)
     finally:
         if 'Opened' in out:
-            out += "\nRemember this wallet as default for this ezeos session!"
+            out += "\nRemember this wallet as default for this core session!"
         app.outputPanel.logger(out)
 
 

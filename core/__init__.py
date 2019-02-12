@@ -6,6 +6,7 @@ import os, subprocess
 DOCKER_CONTAINER_NAME = 'eos'
 TIMEOUT = 3
 VERSION = "EZEOS v0.0.1"
+THEME = 'default'
 
 CONTRACT_FOLDER = os.environ['HOME'] + '/code/volentix/contracts'
 if not os.path.exists(CONTRACT_FOLDER):
@@ -18,7 +19,7 @@ except FileNotFoundError as e:
     CDT_VERSION = "EOSIO-CDT not installed"
 EZEOS_DIR = os.path.dirname(os.path.abspath(__file__))
 ROOT_DIR = os.path.abspath(os.path.join(EZEOS_DIR, os.pardir))
-CONFIG_PATH = os.path.join(ROOT_DIR, 'ezeos.conf')
+CONFIG_PATH = os.path.join(ROOT_DIR, 'core.conf')
 
 EZEOS = '''
  ______   ______  ______    ____     _____
@@ -29,8 +30,10 @@ EZEOS = '''
 |______| /_____| |______|  \____/  |_____/
 '''
 
-MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
+MAIN_PRODUCERS = ['PRODUCER',
+                  'https://api.eosnewyork.io:443',
                   'https://api.eosdetroit.io:443',
+                  'http://35.183.49.71:8888',
                   'https://eos.greymass.com:443',
                   'https://api.eosmetal.io:18890',
                   'http://api.hkeos.com:80',
@@ -60,6 +63,7 @@ MAIN_PRODUCERS = ['https://api.eosnewyork.io:443',
                   'https://api.eosn.io',
                   'https://eu1.eosdac.io:443']
 
-TEST_PRODUCERS = ['http://api.kylin.alohaeos.com',
+TEST_PRODUCERS = ['PRODUCER',
+                  'http://api.kylin.alohaeos.com',
                   'http://127.0.0.1:8888',
                   'http://35.183.129.78:8080']
