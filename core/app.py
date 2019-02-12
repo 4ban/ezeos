@@ -5,8 +5,11 @@ from tkinter import Tk
 from gui.ui import UI
 from core import DOCKER_CONTAINER_NAME
 from core import TIMEOUT
+from core import btc
+from core import eth
 import subprocess
 import os
+import signal
 
 
 def run():
@@ -20,6 +23,10 @@ def run():
     root.attributes('-topmost', True)
     root.attributes('-topmost', False)
     root.mainloop()
+
+
+def handler(signum, frame):
+    raise RuntimeError("End of time")
 
 
 def getCleosCommand():
@@ -420,3 +427,47 @@ def getAccountTable():
         out = "Could not get account table. \n" + str(e)
     finally:
         app.outputPanel.logger(out)
+
+def getBtcBalance(address):
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = btc.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get BTC balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get BTC balance.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+def getEthBalance(address):
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        # out = eth.getBalance(address)
+        out = "todo"
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get ETH balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get ETH balance.\n' + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+def getXmrBalance(address):
+    pass
+
+def getNeoBalance(address):
+    pass
+
+def getLtcBalance(address):
+    pass
+
+def getBchBalance(address):
+    pass
+
+def getDashBalance(address):
+    pass
