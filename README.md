@@ -45,9 +45,11 @@ python3 ezeos.py
 Happy hacking!
 
 ## Screenshots
-![1](https://user-images.githubusercontent.com/2269864/48857228-5e66dc00-ed86-11e8-9d03-a6deab10d43d.png)
-![2](https://user-images.githubusercontent.com/2269864/48857229-5eff7280-ed86-11e8-80cc-c4a843a82a4e.png)
-![3](https://user-images.githubusercontent.com/2269864/48857230-5eff7280-ed86-11e8-9bef-7d20076b1e61.png)
+
+<img width="1199" alt="screen shot 2019-02-12 at 11 19 44 am" src="https://user-images.githubusercontent.com/2269864/52650518-667f7500-2eb8-11e9-8dd1-b0eb29178075.png">
+<img width="1194" alt="screen shot 2019-02-12 at 11 20 03 am" src="https://user-images.githubusercontent.com/2269864/52650519-667f7500-2eb8-11e9-8ac3-59c167fb16f0.png">
+<img width="1201" alt="screen shot 2019-02-12 at 11 20 26 am" src="https://user-images.githubusercontent.com/2269864/52650520-67180b80-2eb8-11e9-8f6c-28cdcaf07984.png">
+<img width="1199" alt="screen shot 2019-02-12 at 11 20 52 am" src="https://user-images.githubusercontent.com/2269864/52650523-68493880-2eb8-11e9-9695-0afc1c587f12.png">
 
 ## Contribute
 
