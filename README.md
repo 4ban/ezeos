@@ -33,6 +33,16 @@ get tables and use a contract to transfer funds to a ledger.
 if you want to use more than 4 default themes, install `ttkthemes` (optional, recommended)
 * pip3 install ttkthemes
 
+There is a possibility that you have to install additional libraries:
+* pip3 install beautifulsoup4
+* pip3 install moneywagon
+* pip3 install requests
+
+For the further update:
+> * pip3 install Pillow
+> * pip3 install SocketIO-client
+> * pip3 install pyte
+
 ## Usage
 
 At the root of this project:
