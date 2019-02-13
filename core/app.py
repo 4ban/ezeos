@@ -430,6 +430,74 @@ def getAccountTable():
         app.outputPanel.logger(out)
 
 
+def buyRam():
+    creator = app.tabPanel.accountCreator.get()
+    owner = app.tabPanel.accountOwner.get()
+    ram = app.tabPanel.ram.get()
+    # #buy ram for yourself
+    # cleos system buyram someaccount1 someaccount1 "10 EOS"
+    #
+    # #buy ram for someone else
+    # cleos system buyram someaccount1 someaccount2 "1 EOS"
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'system', 'buyram', creator, owner, ram],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not buy RAM\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get but RAM. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def stakeNet():
+    creator = app.tabPanel.accountCreator.get()
+    owner = app.tabPanel.accountOwner.get()
+    net = app.tabPanel.net.get()
+    cpu = app.tabPanel.cpu.get()
+    # cleos system delegatebw accountname1 accountname2 "1 SYS" "1 SYS"
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'system', 'delegatebw', creator, owner, net, cpu],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not stake NET\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get stake NET. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
+def createAccount():
+    creator = app.tabPanel.accountCreator.get()
+    owner = app.tabPanel.accountOwner.get()
+    activeKey = app.tabPanel.accountActiveKey.get()
+    ownerKey = app.tabPanel.accountOwnerKey.get()
+    cpu = app.tabPanel.cpu.get()
+    net = app.tabPanel.net.get()
+    ram = app.tabPanel.ram.get()
+    permission = creator + '@active'
+    # cleos -u http://IP-HERE:8888 system newaccount --stake-net "0.1000 EOS" --stake-cpu "0.1000 EOS" --buy-ram-kbytes 8 eosio myDesiredAccountName Public key Public key
+
+    try:
+        out = subprocess.run(cleos + ['--url', app.tabPanel.producer.get(), 'system', 'newaccount', creator, owner, ownerKey, activeKey, '--stake-net', net, '--stake-cpu', cpu, '--buy-ram', ram, '--transfer', '-p', permission],
+                             timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+        out = out.stdout.decode('utf-8')
+    except subprocess.TimeoutExpired as e:
+        print(e)
+        out = 'Timeout. Can not stake NET\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = "Could not get stake NET. \n" + str(e)
+    finally:
+        app.outputPanel.logger(out)
+
+
 # Currency operations
 def getBtcBalance(address):
     signal.signal(signal.SIGALRM, handler)

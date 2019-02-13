@@ -5,6 +5,7 @@ import os
 from tkinter import *
 from tkinter import ttk
 from tkinter import simpledialog
+from tkinter import messagebox
 from tkinter import filedialog
 from core import MAIN_PRODUCERS
 from core import TEST_PRODUCERS
@@ -32,6 +33,13 @@ class TabPanel(object):
         self.accountTable = StringVar()
         self.accountLower = IntVar()
         self.accountLimit = IntVar()
+        self.accountCreator = StringVar()
+        self.accountActiveKey = StringVar()
+        self.accountOwner = StringVar()
+        self.accountOwnerKey = StringVar()
+        self.stakeCPU = StringVar()
+        self.stakeNET = StringVar()
+        self.ram = StringVar()
 
         # Variables tab 4
         self.contractFileCPP = StringVar()
@@ -189,7 +197,7 @@ class TabPanel(object):
         accountAbi = ttk.Button(self.accountFrame, text="Get account abi", command=ezeos.getAccountAbi)
         accountAbi.grid(row=0, column=6, padx=2, pady=2, ipady=2, sticky=EW)
 
-        ttk.Separator(self.accountFrame).grid(row=1, column=0, columnspan=10, sticky="ew")
+        ttk.Separator(self.accountFrame).grid(row=1, column=0, columnspan=10, pady=5, sticky="ew")
 
         accountScopeLabel = ttk.Label(self.accountFrame, text="Scope name: ")
         accountScopeLabel.grid(row=2, column=0)
@@ -221,6 +229,58 @@ class TabPanel(object):
 
         accountTable = ttk.Button(self.accountFrame, text="Get account table", command=ezeos.getAccountTable)
         accountTable.grid(row=2, column=2, rowspan=4, padx=2, pady=2, ipady=2, sticky=EW)
+
+        # Creating an account options
+        self.accountFrameEx = ttk.LabelFrame(self.tab3, text="Creating an account")
+        self.accountFrameEx.grid(row=1, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
+
+        ttk.Label(self.accountFrameEx, text="Stake CPU: ").grid(row=0, column=0)
+        self.cpu = ttk.Entry(self.accountFrameEx)
+        self.cpu.insert(END, '0.1000 EOS')
+        self.cpu.grid(row=1, column=0, ipady=2, ipadx=2)
+
+        ttk.Label(self.accountFrameEx, text="Stake NET: ").grid(row=0, column=1)
+        self.net = ttk.Entry(self.accountFrameEx)
+        self.net.insert(END, '0.1000 EOS')
+        self.net.grid(row=1, column=1, ipady=2, ipadx=2)
+
+        ttk.Label(self.accountFrameEx, text="RAM: ").grid(row=0, column=2)
+        self.ram = ttk.Entry(self.accountFrameEx)
+        self.ram.insert(END, '1 EOS')
+        self.ram.grid(row=1, column=2, ipady=2, ipadx=2)
+
+        buyRam = ttk.Button(self.accountFrameEx, text="Buy Ram", command=self.buyRam)
+        buyRam.grid(row=0, column=3, rowspan=2, padx=2, pady=2, ipady=2, sticky=EW)
+        stakeNet = ttk.Button(self.accountFrameEx, text="Stake NET", command=self.stakeNet)
+        stakeNet.grid(row=0, column=4, rowspan=2, padx=2, pady=2, ipady=2, sticky=EW)
+
+        ttk.Separator(self.accountFrameEx).grid(row=2, column=0, columnspan=5, pady=5, sticky="ew")
+
+        accountCreatorLabel = ttk.Label(self.accountFrameEx, text="Creator: ")
+        accountCreatorLabel.grid(row=3, column=0)
+        self.accountCreator = ttk.Entry(self.accountFrameEx)
+        self.accountCreator.insert(END, 'volentixcrtr')
+        self.accountCreator.grid(row=4, column=0, ipady=2, ipadx=2)
+        accountOwnerLabel = ttk.Label(self.accountFrameEx, text="Owner: ")
+        accountOwnerLabel.grid(row=3, column=1)
+        self.accountOwner = ttk.Entry(self.accountFrameEx)
+        self.accountOwner.insert(END, 'volentixownr')
+        self.accountOwner.grid(row=4, column=1, ipady=2, ipadx=2)
+
+        accountActiveKeyLabel = ttk.Label(self.accountFrameEx, text="Active Key: ")
+        accountActiveKeyLabel.grid(row=3, column=2)
+        self.accountActiveKey = ttk.Entry(self.accountFrameEx)
+        self.accountActiveKey.insert(END, 'key')
+        self.accountActiveKey.grid(row=4, column=2, ipady=2, ipadx=2)
+
+        accountOwnerKeyLabel = ttk.Label(self.accountFrameEx, text="Owner Key: ")
+        accountOwnerKeyLabel.grid(row=3, column=3)
+        self.accountOwnerKey = ttk.Entry(self.accountFrameEx)
+        self.accountOwnerKey.insert(END, 'key')
+        self.accountOwnerKey.grid(row=4, column=3, ipady=2, ipadx=2)
+
+        createAccount = ttk.Button(self.accountFrameEx, text="Create", command=self.createAccount)
+        createAccount.grid(row=3, column=4, rowspan=2, padx=2, pady=2, ipady=2, sticky=EW)
 
     def fillTab4(self):
         # Contract operations
@@ -330,6 +390,53 @@ class TabPanel(object):
             ezeos.showPrivateKeys(password)
         else:
             self.parent.log("Something went wrong!")
+
+    def buyRam(self):
+        payer = self.accountCreator.get()
+        receiver = self.accountOwner.get()
+        tokens = self.ram.get()
+        if 'EOS' in tokens:
+            answer = messagebox.askyesno("Validation", "The '%s' will pay '%s' to RAM for '%s'? Is that correct?" % (payer, tokens, receiver))
+            if answer:
+                ezeos.buyRam()
+            else:
+                self.parent.log("Rechecking the inputs!")
+        else:
+            messagebox.askokcancel("Error", "The EOS must be in the field RAM.")
+            self.parent.log("Rechecking the inputs!")
+
+    def stakeNet(self):
+        payer = self.accountCreator.get()
+        receiver = self.accountOwner.get()
+        net = self.net.get()
+        cpu = self.cpu.get()
+        if 'EOS' in net and 'EOS' in cpu:
+            answer = messagebox.askyesno("Validation", "The '%s' will pay '%s' for CPU and '%s' for NET for the '%s'? Is that correct?" % (payer, cpu, net, receiver))
+            if answer:
+                ezeos.stakeNet()
+            else:
+                self.parent.log("Rechecking the inputs!")
+        else:
+            messagebox.askokcancel("Error", "The EOS must be in the fields CPU and RAM.")
+            self.parent.log("Rechecking the inputs!")
+
+    def createAccount(self):
+        creator = self.accountCreator.get()
+        owner = self.accountOwner.get()
+        activeKey = self.accountActiveKey.get()
+        ownerKey = self.accountOwnerKey.get()
+        cpu = self.cpu.get()
+        net = self.net.get()
+        ram = self.ram.get()
+        if 'EOS' in cpu and 'EOS' in net and 'EOS' in ram:
+            answer = messagebox.askyesno("Validation", "Creating an account with the following data: \n Creator: %s \n Owner: %s \n Creator key: %s \n Owner Key: %s \n CPU: %s \n NET: %s \n RAM: %s \n Is that correct?" % (creator, owner, activeKey, ownerKey, cpu, net, ram))
+            if answer:
+                ezeos.createAccount()
+            else:
+                self.parent.log("Rechecking the inputs!")
+        else:
+            messagebox.askokcancel("Error", "The EOS must be in the fields CPU and RAM and NET.")
+            self.parent.log("Rechecking the inputs!")
 
     def unlockWallet(self):
         password = simpledialog.askstring("Password", "Password from wallet", parent=self.walletKeyFrame)
