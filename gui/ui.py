@@ -20,7 +20,7 @@ class UI(object):
     def __init__(self, root):
         self.root = root
         self.root.title("EZEOS")
-        self.root.geometry('980x600')
+        self.root.geometry('980x700')
 
         try:
             import ttkthemes
