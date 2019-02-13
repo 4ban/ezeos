@@ -283,7 +283,7 @@ class TabPanel(object):
 
         # LTC
         self.ltcFrame = ttk.LabelFrame(self.tab5, text="LTC")
-        self.ltcFrame.grid(row=0, column=4, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.ltcFrame.grid(row=1, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
         ltcAddress = ttk.Entry(self.ltcFrame)
         ltcAddress.insert(END, self.ltc)
         ltcAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
@@ -292,7 +292,7 @@ class TabPanel(object):
 
         # BCH
         self.bchFrame = ttk.LabelFrame(self.tab5, text="BCH")
-        self.bchFrame.grid(row=1, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.bchFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
         bchAddress = ttk.Entry(self.bchFrame)
         bchAddress.insert(END, self.bch)
         bchAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
@@ -301,7 +301,7 @@ class TabPanel(object):
 
         # DASH
         self.dashFrame = ttk.LabelFrame(self.tab5, text="DASH")
-        self.dashFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.dashFrame.grid(row=1, column=2, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
         dashAddress = ttk.Entry(self.dashFrame)
         dashAddress.insert(END, self.dash)
         dashAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
