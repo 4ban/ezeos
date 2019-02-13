@@ -69,7 +69,7 @@ class TabPanel(object):
 
         # TODO move everything to the label frames
         networkFrame = ttk.LabelFrame(self.tab1, text="Network")
-        networkFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+        networkFrame.grid(row=0, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
 
         mainNet = ttk.Radiobutton(networkFrame, text='Main Net', value=1, variable=self.netState, command=self.update_tab1)
         testNet = ttk.Radiobutton(networkFrame, text='Test Net', value=2, variable=self.netState, command=self.update_tab1)
@@ -79,115 +79,115 @@ class TabPanel(object):
         self.testNetList = ttk.OptionMenu(networkFrame, self.producer, *TEST_PRODUCERS)
         self.testNetList.configure(state="normal")
 
-        mainNet.grid(row=0, column=0, padx=5, pady=5)
-        self.mainNetList.grid(row=0, column=1, columnspan=2, padx=5, pady=5)
-        testNet.grid(row=1, column=0, padx=5, pady=5)
-        self.testNetList.grid(row=1, column=1, columnspan=2, padx=5, pady=5)
+        mainNet.grid(row=0, column=0, padx=2, pady=2)
+        self.mainNetList.grid(row=0, column=1, columnspan=2, padx=2, pady=2)
+        testNet.grid(row=1, column=0, padx=2, pady=2)
+        self.testNetList.grid(row=1, column=1, columnspan=2, padx=2, pady=2)
 
         currentProducer = ttk.Button(networkFrame, text="Show current producer", command=self.show_current_producer)
-        currentProducer.grid(row=0, column=3, rowspan=2, padx=5, pady=5, ipady=5)
+        currentProducer.grid(row=0, column=3, rowspan=2, padx=2, pady=2, ipady=2)
 
         # Block
         blockFrame = ttk.LabelFrame(self.tab1, text="Block")
-        blockFrame.grid(row=0, column=1, sticky=NSEW, padx=5, pady=5, ipady=5, ipadx=5)
+        blockFrame.grid(row=0, column=1, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
 
         blockNumberLabel = ttk.Label(blockFrame, text="Enter block number:")
         blockNumberLabel.grid(row=0, column=0)
         self.blockNumber = ttk.Entry(blockFrame)
         self.blockNumber.insert(END, '1')
-        self.blockNumber.grid(row=0, column=1, ipadx=3, padx=5, ipady=3, sticky=EW)
+        self.blockNumber.grid(row=0, column=1, ipadx=2, padx=2, ipady=2, sticky=EW)
 
         blockInfo = ttk.Button(blockFrame, text="Block info", command=ezeos.getBlockInfo)
-        blockInfo.grid(row=0, column=2, ipady=5, sticky=EW)
+        blockInfo.grid(row=0, column=2, ipady=2, sticky=EW)
 
         info = ttk.Button(blockFrame, text="Get producer info", command=ezeos.getProducerInfo)
-        info.grid(row=1, column=0, padx=5, pady=5, ipady=5, sticky=EW)
+        info.grid(row=1, column=0, padx=2, pady=2, ipady=2, sticky=EW)
 
         blockProducers = ttk.Button(blockFrame, text="Get producers list", command=ezeos.getBlockProducers)
-        blockProducers.grid(row=1, column=1, padx=5, pady=5, ipady=5, sticky=EW)
+        blockProducers.grid(row=1, column=1, padx=2, pady=2, ipady=2, sticky=EW)
 
     def fillTab2(self):
         self.toConsole.set('--to-console')
 
         createWalletFrame = ttk.LabelFrame(self.tab2, text="Create wallet")
-        createWalletFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5, columnspan=2)
+        createWalletFrame.grid(row=0, column=0, sticky=NSEW, padx=2,pady=2, ipady=2, ipadx=2, columnspan=2)
 
         walletNameLabel = ttk.Label(createWalletFrame, text="Enter wallet name: ")
         walletNameLabel.grid(row=0, column=0)
         self.walletName = ttk.Entry(createWalletFrame)
         self.walletName.insert(END, 'default')
-        self.walletName.grid(row=0, column=1, ipady=3, ipadx=3)
+        self.walletName.grid(row=0, column=1, ipady=2, ipadx=2)
 
         toConsole = ttk.Radiobutton(createWalletFrame, text='To console', value='--to-console', variable=self.toConsole)
         toFile = ttk.Radiobutton(createWalletFrame, text='To file', value='--file', variable=self.toConsole, state=DISABLED)
-        toConsole.grid(row=0, column=2, padx=5, pady=5)
-        toFile.grid(row=0, column=3, padx=5, pady=5)
+        toConsole.grid(row=0, column=2, padx=2, pady=2)
+        toFile.grid(row=0, column=3, padx=2, pady=2)
 
         createWallet = ttk.Button(createWalletFrame, text="Create wallet", command=ezeos.createWallet)
-        createWallet.grid(row=0, column=4, padx=5, ipady=5)
+        createWallet.grid(row=0, column=4, padx=2, ipady=2)
 
         walletFrame = ttk.LabelFrame(self.tab2, text="Wallet operations")
-        walletFrame.grid(row=1, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+        walletFrame.grid(row=1, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
 
         walletListFilesystem = ttk.Button(walletFrame, text="List wallets (filesystem)", command=ezeos.getWalletListFilesystem)
-        walletListFilesystem.grid(row=0, column=0, padx=5, ipady=5, sticky=EW)
+        walletListFilesystem.grid(row=0, column=0, padx=2, ipady=2, sticky=EW)
 
         walletList = ttk.Button(walletFrame, text="List wallets", command=ezeos.getWalletList)
-        walletList.grid(row=0, column=1, padx=5, ipady=5, sticky=EW)
+        walletList.grid(row=0, column=1, padx=2, ipady=2, sticky=EW)
 
         currentWallet = ttk.Button(walletFrame, text="Get current wallet", command=self.currentWallet)
-        currentWallet.grid(row=0, column=2, padx=5, ipady=5, sticky=EW)
+        currentWallet.grid(row=0, column=2, padx=2, ipady=2, sticky=EW)
 
         self.openWalletName = ttk.Entry(walletFrame)
-        self.openWalletName.grid(row=1, column=0, ipadx=3, ipady=3, padx=5, pady=5, sticky=EW)
+        self.openWalletName.grid(row=1, column=0, ipadx=2, ipady=2, padx=2, pady=2, sticky=EW)
 
         openWallet = ttk.Button(walletFrame, text="Open wallet", command=ezeos.openWallet)
-        openWallet.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=EW)
+        openWallet.grid(row=1, column=1, padx=2, ipady=2, pady=2, sticky=EW)
 
         unlockWallet = ttk.Button(walletFrame, text="Unlock wallet", command=self.unlockWallet)
-        unlockWallet.grid(row=1, column=2, padx=5, ipady=5, pady=5, sticky=EW)
+        unlockWallet.grid(row=1, column=2, padx=2, ipady=2, pady=2, sticky=EW)
 
         self.walletKeyFrame = ttk.LabelFrame(self.tab2, text="Keys operations")
-        self.walletKeyFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.walletKeyFrame.grid(row=1, column=1, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
 
         showKeys = ttk.Button(self.walletKeyFrame, text="Show public keys", command=ezeos.showKeys)
-        showKeys.grid(row=0, column=0, padx=5, ipady=5, pady=5, sticky=W)
+        showKeys.grid(row=0, column=0, padx=2, ipady=2, pady=2, sticky=W)
 
         showPrivateKeys = ttk.Button(self.walletKeyFrame, text="Show private keys", command=self.showPrivateKeys)
-        showPrivateKeys.grid(row=0, column=1, padx=5, ipady=5, pady=5, sticky=EW)
+        showPrivateKeys.grid(row=0, column=1, padx=2, ipady=2, pady=2, sticky=EW)
 
         createKeys = ttk.Button(self.walletKeyFrame, text="Create key pair", command=ezeos.createKeys)
-        createKeys.grid(row=1, column=0, padx=5, ipady=5, pady=5, sticky=EW)
+        createKeys.grid(row=1, column=0, padx=2, ipady=2, pady=2, sticky=EW)
 
         importPrivateKeys = ttk.Button(self.walletKeyFrame, text="Import key", command=self.importKey)
-        importPrivateKeys.grid(row=1, column=1, padx=5, ipady=5, pady=5, sticky=EW)
+        importPrivateKeys.grid(row=1, column=1, padx=2, ipady=2, pady=2, sticky=EW)
 
     def fillTab3(self):
         # Account operations
         self.accountFrame = ttk.LabelFrame(self.tab3, text="Account details")
-        self.accountFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+        self.accountFrame.grid(row=0, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
 
         accountNameLabel = ttk.Label(self.accountFrame, text="Account name: ")
         accountNameLabel.grid(row=0, column=0)
 
         self.accountName = ttk.Entry(self.accountFrame)
         self.accountName.insert(END, 'volentixfrst')
-        self.accountName.grid(row=0, column=1, ipady=3, ipadx=3)
+        self.accountName.grid(row=0, column=1, ipady=2, ipadx=2)
 
         accountBalance = ttk.Button(self.accountFrame, text="Get account balance",command=ezeos.getAccountBalance)
-        accountBalance.grid(row=0, column=2, padx=5, pady=5, ipady=5, sticky=EW)
+        accountBalance.grid(row=0, column=2, padx=2, pady=2, ipady=2, sticky=EW)
 
         accountDetails = ttk.Button(self.accountFrame, text="Get account details", command=ezeos.getAccountDetails)
-        accountDetails.grid(row=0, column=3, padx=5, pady=5, ipady=5, sticky=EW)
+        accountDetails.grid(row=0, column=3, padx=2, pady=2, ipady=2, sticky=EW)
 
         accountActions = ttk.Button(self.accountFrame, text="Get account actions", command=ezeos.getAccountActions)
-        accountActions.grid(row=0, column=4, padx=5, pady=5, ipady=5, sticky=EW)
+        accountActions.grid(row=0, column=4, padx=2, pady=2, ipady=2, sticky=EW)
 
         accountCode = ttk.Button(self.accountFrame, text="Get account code", command=ezeos.getAccountCode)
-        accountCode.grid(row=0, column=5, padx=5, pady=5, ipady=5, sticky=EW)
+        accountCode.grid(row=0, column=5, padx=2, pady=2, ipady=2, sticky=EW)
 
         accountAbi = ttk.Button(self.accountFrame, text="Get account abi", command=ezeos.getAccountAbi)
-        accountAbi.grid(row=0, column=6, padx=5, pady=5, ipady=5, sticky=EW)
+        accountAbi.grid(row=0, column=6, padx=2, pady=2, ipady=2, sticky=EW)
 
         ttk.Separator(self.accountFrame).grid(row=1, column=0, columnspan=10, sticky="ew")
 
@@ -196,45 +196,45 @@ class TabPanel(object):
 
         self.accountScope = ttk.Entry(self.accountFrame)
         self.accountScope.insert(END, self.accountName.get())
-        self.accountScope.grid(row=2, column=1, pady=5, ipady=3, ipadx=3)
+        self.accountScope.grid(row=2, column=1, pady=2, ipady=2, ipadx=2)
 
         accountTableLabel = ttk.Label(self.accountFrame, text="Table name: ")
         accountTableLabel.grid(row=3, column=0)
 
         self.accountTable = ttk.Entry(self.accountFrame)
         self.accountTable.insert(END, 'entry')
-        self.accountTable.grid(row=3, column=1, pady=5, ipady=3, ipadx=3)
+        self.accountTable.grid(row=3, column=1, pady=2, ipady=2, ipadx=2)
 
         accountLowerLabel = ttk.Label(self.accountFrame, text="Lower bound: ")
         accountLowerLabel.grid(row=4, column=0)
 
         self.accountLower = ttk.Entry(self.accountFrame)
         self.accountLower.insert(END, 0)
-        self.accountLower.grid(row=4, column=1, pady=5, ipady=3, ipadx=3)
+        self.accountLower.grid(row=4, column=1, pady=2, ipady=2, ipadx=2)
 
         accountLimitLabel = ttk.Label(self.accountFrame, text="Limit: ")
         accountLimitLabel.grid(row=5, column=0)
 
         self.accountLimit = ttk.Entry(self.accountFrame)
         self.accountLimit.insert(END, 5)
-        self.accountLimit.grid(row=5, column=1, pady=5, ipady=3, ipadx=3)
+        self.accountLimit.grid(row=5, column=1, pady=2, ipady=2, ipadx=2)
 
         accountTable = ttk.Button(self.accountFrame, text="Get account table", command=ezeos.getAccountTable)
-        accountTable.grid(row=2, column=2, rowspan=4, padx=5, pady=5, ipady=5, sticky=EW)
+        accountTable.grid(row=2, column=2, rowspan=4, padx=2, pady=2, ipady=2, sticky=EW)
 
     def fillTab4(self):
         # Contract operations
         self.contractFrame = ttk.LabelFrame(self.tab4, text="Contract operations")
-        self.contractFrame.grid(row=0, column=0, sticky=NSEW, pady=5, ipady=5, ipadx=5)
+        self.contractFrame.grid(row=0, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2)
 
         openContract = ttk.Button(self.contractFrame, text="Open contract", command=self.openContract)
-        openContract.grid(row=0, column=0, padx=5, ipady=5, sticky=EW)
+        openContract.grid(row=0, column=0, padx=2, ipady=2, sticky=EW)
 
         compileContract = ttk.Button(self.contractFrame, text="Compile contract", command=ezeos.compileContract)
-        compileContract.grid(row=0, column=1, padx=5, ipady=5, sticky=EW)
+        compileContract.grid(row=0, column=1, padx=2, ipady=2, sticky=EW)
 
         setContract = ttk.Button(self.contractFrame, text="Set contract", command=ezeos.setContract)
-        setContract.grid(row=0, column=2, padx=5, ipady=5, sticky=EW)
+        setContract.grid(row=0, column=2, padx=2, ipady=2, sticky=EW)
 
     def fillTab5(self):
         self.btc = "1DwzjjBvHCtr5Hn5kZs72KABfKnoFjJSMy"
@@ -247,66 +247,66 @@ class TabPanel(object):
 
         # BTC
         self.btcFrame = ttk.LabelFrame(self.tab5, text="BTC")
-        self.btcFrame.grid(row=0, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.btcFrame.grid(row=0, column=0, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         btcAddress = ttk.Entry(self.btcFrame)
         btcAddress.insert(END, self.btc)
-        btcAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        btcAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         btcGetBalance = ttk.Button(self.btcFrame, text="Get Balance", command=lambda: ezeos.getBtcBalance(btcAddress.get()))
-        btcGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        btcGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # ETH
         self.ethFrame = ttk.LabelFrame(self.tab5, text="ETH")
-        self.ethFrame.grid(row=0, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.ethFrame.grid(row=0, column=1, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         ethAddress = ttk.Entry(self.ethFrame)
         ethAddress.insert(END, self.eth)
-        ethAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        ethAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         ethGetBalance = ttk.Button(self.ethFrame, text="Get Balance", command=lambda: ezeos.getEthBalance(ethAddress.get()))
-        ethGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        ethGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # XMR
         self.xmrFrame = ttk.LabelFrame(self.tab5, text="XMR")
-        self.xmrFrame.grid(row=0, column=2, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.xmrFrame.grid(row=0, column=2, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         xmrAddress = ttk.Entry(self.xmrFrame)
         xmrAddress.insert(END, self.xmr)
-        xmrAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        xmrAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         xmrGetBalance = ttk.Button(self.xmrFrame, text="Get Balance", command=lambda: ezeos.getXmrBalance(xmrAddress.get()))
-        xmrGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        xmrGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # NEO
         self.neoFrame = ttk.LabelFrame(self.tab5, text="NEO")
-        self.neoFrame.grid(row=0, column=3, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.neoFrame.grid(row=0, column=3, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         neoAddress = ttk.Entry(self.neoFrame)
         neoAddress.insert(END, self.neo)
-        neoAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        neoAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         neoGetBalance = ttk.Button(self.neoFrame, text="Get Balance", command=lambda: ezeos.getNeoBalance(neoAddress.get()))
-        neoGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        neoGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # LTC
         self.ltcFrame = ttk.LabelFrame(self.tab5, text="LTC")
-        self.ltcFrame.grid(row=1, column=0, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.ltcFrame.grid(row=1, column=0, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         ltcAddress = ttk.Entry(self.ltcFrame)
         ltcAddress.insert(END, self.ltc)
-        ltcAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        ltcAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         ltcGetBalance = ttk.Button(self.ltcFrame, text="Get Balance", command=lambda: ezeos.getLtcBalance(ltcAddress.get()))
-        ltcGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        ltcGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # BCH
         self.bchFrame = ttk.LabelFrame(self.tab5, text="BCH")
-        self.bchFrame.grid(row=1, column=1, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.bchFrame.grid(row=1, column=1, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         bchAddress = ttk.Entry(self.bchFrame)
         bchAddress.insert(END, self.bch)
-        bchAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        bchAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         bchGetBalance = ttk.Button(self.bchFrame, text="Get Balance", command=lambda: ezeos.getBchBalance(bchAddress.get()))
-        bchGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        bchGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
         # DASH
         self.dashFrame = ttk.LabelFrame(self.tab5, text="DASH")
-        self.dashFrame.grid(row=1, column=2, sticky=NSEW, pady=5, padx=5, ipady=5, ipadx=5)
+        self.dashFrame.grid(row=1, column=2, sticky=NSEW, pady=2, padx=2, ipady=2, ipadx=2)
         dashAddress = ttk.Entry(self.dashFrame)
         dashAddress.insert(END, self.dash)
-        dashAddress.grid(row=0, column=0, pady=5, ipady=3, ipadx=3)
+        dashAddress.grid(row=0, column=0, pady=2, padx=2, ipady=2, ipadx=2)
         dashGetBalance = ttk.Button(self.dashFrame, text="Get Balance", command=lambda: ezeos.getDashBalance(dashAddress.get()))
-        dashGetBalance.grid(row=2, column=0, padx=5, ipady=5, sticky=EW)
+        dashGetBalance.grid(row=2, column=0, pady=2, padx=2, ipady=2, ipadx=2, sticky=EW)
 
     def update_tab1(self):
         if self.netState.get() == 1:
