@@ -5,7 +5,7 @@ from tkinter import Tk
 from gui.ui import UI
 from core import DOCKER_CONTAINER_NAME
 from core import TIMEOUT
-from core import btc, bhc, dash, eth, ltc, neo, xmr
+from core import btc, bch, dash, eth, ltc, neo, xmr
 import subprocess
 import os
 import signal
@@ -443,6 +443,7 @@ def getBtcBalance(address):
         print(e)
         out = 'Can not get BTC balance.\n' + str(e)
     finally:
+        signal.alarm(0)
         app.outputPanel.logger(out)
 
 
@@ -450,8 +451,7 @@ def getEthBalance(address):
     signal.signal(signal.SIGALRM, handler)
     signal.alarm(TIMEOUT)
     try:
-        # out = eth.getBalance(address)
-        out = "todo"
+        out = eth.getBalance(address)
     except RuntimeError as e:
         print(e)
         out = 'Can not get ETH balance. Timeout error.\n' + str(e)
@@ -459,24 +459,85 @@ def getEthBalance(address):
         print(e)
         out = 'Can not get ETH balance.\n' + str(e)
     finally:
+        signal.alarm(0)
         app.outputPanel.logger(out)
 
 
 def getXmrBalance(address):
-    pass
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = xmr.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get XMR balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get XMR balance.\n' + str(e)
+    finally:
+        signal.alarm(0)
+        app.outputPanel.logger(out)
 
 
 def getNeoBalance(address):
-    pass
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = neo.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get NEO balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get NEO balance.\n' + str(e)
+    finally:
+        signal.alarm(0)
+        app.outputPanel.logger(out)
 
 
 def getLtcBalance(address):
-    pass
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = ltc.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get LTC balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get LTC balance.\n' + str(e)
+    finally:
+        signal.alarm(0)
+        app.outputPanel.logger(out)
 
 
 def getBchBalance(address):
-    pass
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = bch.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get BCH balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get BCH balance.\n' + str(e)
+    finally:
+        signal.alarm(0)
+        app.outputPanel.logger(out)
 
 
 def getDashBalance(address):
-    pass
+    signal.signal(signal.SIGALRM, handler)
+    signal.alarm(TIMEOUT)
+    try:
+        out = dash.getBalance(address)
+    except RuntimeError as e:
+        print(e)
+        out = 'Can not get DASH balance. Timeout error.\n' + str(e)
+    except Exception as e:
+        print(e)
+        out = 'Can not get DASH balance.\n' + str(e)
+    finally:
+        signal.alarm(0)
+        app.outputPanel.logger(out)

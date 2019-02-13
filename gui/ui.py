@@ -11,16 +11,16 @@ from core import EZEOS
 from core import VERSION
 from core import CDT_VERSION
 from core import THEME
-from PIL import Image
-from PIL import ImageTk
-from core import ROOT_DIR
+# from PIL import Image
+# from PIL import ImageTk
+# from core import ROOT_DIR
 
 
 class UI(object):
     def __init__(self, root):
         self.root = root
         self.root.title("EZEOS")
-        self.root.geometry('1200x700')
+        self.root.geometry('980x600')
 
         try:
             import ttkthemes
