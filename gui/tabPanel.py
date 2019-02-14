@@ -25,6 +25,7 @@ class TabPanel(object):
         # Variables tab 2
         self.toConsole = StringVar()
         self.walletName = StringVar()
+        self.walletDir = StringVar()
         self.openWalletName = StringVar()
 
         # Variables tab 3
@@ -116,9 +117,21 @@ class TabPanel(object):
 
     def fillTab2(self):
         self.toConsole.set('--to-console')
+        self.walletDir.set('~/eosio-wallet')
+
+        walletDirFrame = ttk.LabelFrame(self.tab2, text="Wallet directory")
+        walletDirFrame.grid(row=0, column=0, sticky=NSEW, padx=2, pady=2, ipady=2, ipadx=2, columnspan=2)
+        ttk.Label(walletDirFrame, text="Directory: ").grid(row=0, column=0)
+        ttk.Label(walletDirFrame, textvariable=self.walletDir).grid(row=0, column=1)
+        self.setWalletDirButton = ttk.Button(walletDirFrame, text="Set wallet dir", command=self.setWalletDir)
+        self.setWalletDirButton.grid(row=0, column=2, padx=2, ipady=2)
+        stopKeosd = ttk.Button(walletDirFrame, text="Stop keosd", command=self.stopKeosd)
+        stopKeosd.grid(row=0, column=3, padx=2, ipady=2)
+        runKeosd = ttk.Button(walletDirFrame, text="Run keosd", command=self.runKeosd)
+        runKeosd.grid(row=0, column=4, padx=2, ipady=2)
 
         createWalletFrame = ttk.LabelFrame(self.tab2, text="Create wallet")
-        createWalletFrame.grid(row=0, column=0, sticky=NSEW, padx=2,pady=2, ipady=2, ipadx=2, columnspan=2)
+        createWalletFrame.grid(row=1, column=0, sticky=NSEW, padx=2,pady=2, ipady=2, ipadx=2, columnspan=2)
 
         walletNameLabel = ttk.Label(createWalletFrame, text="Enter wallet name: ")
         walletNameLabel.grid(row=0, column=0)
@@ -419,6 +432,25 @@ class TabPanel(object):
         else:
             messagebox.askokcancel("Error", "The EOS must be in the fields CPU and RAM.")
             self.parent.log("Rechecking the inputs!")
+
+    def setWalletDir(self):
+        path = simpledialog.askstring("Wallet directory", "New directory for keosd should be full, for example:\n/Users/username/Desktop", parent=self.setWalletDirButton)
+        if path is not None:
+            self.walletDir.set(path)
+            ezeos.setWalletDir()
+        else:
+            self.parent.log("Something went wrong!")
+
+    def runKeosd(self):
+        answer = messagebox.askyesno("Validation", "Run the keosd with default wallet path?\n ~/eosio-wallet")
+        if answer:
+            self.walletDir.set("~/eosio-wallet")
+            ezeos.runKeosd(True)
+        else:
+            self.parent.log("Abort")
+
+    def stopKeosd(self):
+        ezeos.stopKeosd(True)
 
     def createAccount(self):
         creator = self.accountCreator.get()

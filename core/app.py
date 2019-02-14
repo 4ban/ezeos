@@ -498,6 +498,61 @@ def createAccount():
         app.outputPanel.logger(out)
 
 
+def setWalletDir():
+    stop = stopKeosd(False)
+    run = runKeosd(False)
+    app.outputPanel.logger(stop + '\n' + run)
+
+
+def stopKeosd(flag):
+    if flag:
+        try:
+            out = subprocess.run(cleos + ['wallet', 'stop'],
+                timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            out = out.stdout.decode('utf-8')
+        except subprocess.TimeoutExpired as e:
+            print(e)
+            out = 'Timeout. Can not stop keosd\n' + str(e)
+        except Exception as e:
+            print(e)
+            out = "Could not stop keosd. \n" + str(e)
+        finally:
+            app.outputPanel.logger(out)
+    else:
+        try:
+            out = subprocess.run(cleos + ['wallet', 'stop'],
+                                 timeout=TIMEOUT, stdout=subprocess.PIPE, stderr=subprocess.STDOUT)
+            out = out.stdout.decode('utf-8')
+        except subprocess.TimeoutExpired as e:
+            print(e)
+            out = 'Timeout. Can not stop keosd\n' + str(e)
+        except Exception as e:
+            print(e)
+            out = "Could not stop keosd. \n" + str(e)
+        finally:
+            return out
+
+
+def runKeosd(flag):
+    # TODO rewrite function
+    if flag:
+        try:
+            out = os.spawnl(os.P_NOWAIT, 'keosd', '--wallet-dir', '~/eosio-wallet')
+        except Exception as e:
+            print('Could not run keosd by default path: ' + str(e))
+            out = "Could not run keosd by default path: " + str(e)
+        finally:
+            app.outputPanel.logger(str(out))
+    else:
+        try:
+            out = os.spawnl(os.P_NOWAIT, 'keosd', '--wallet-dir', app.tabPanel.walletDir.get())
+        except Exception as e:
+            print('Could not run keosd ' + str(e))
+            out = "Could not run keosd " + str(e)
+        finally:
+            return str(out)
+
+
 # Currency operations
 def getBtcBalance(address):
     signal.signal(signal.SIGALRM, handler)
