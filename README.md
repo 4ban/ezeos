@@ -1,4 +1,5 @@
 # EZEOS
+[<img src="https://raw.githubusercontent.com/4ban/ezeos/master/.github/black_img.png">](https://www.buymeacoffee.com/4ban)
 
 [![standard-readme compliant](https://img.shields.io/badge/standard--readme-OK-green.svg?style=flat-square)](https://github.com/RichardLitt/standard-readme)
 [![Open Source Love](https://badges.frapsoft.com/os/v1/open-source.png?v=103)](https://github.com/ellerbrock/open-source-badges/)
